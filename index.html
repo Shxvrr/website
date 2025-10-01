@@ -43,10 +43,6 @@
             color: #000000;
         }
 
-        .name-section .subtitle {
-            display: none;
-        }
-
         .bio-section p {
             margin-bottom: 12px;
             font-size: 0.9rem;
@@ -60,31 +56,6 @@
 
         .contact-info:hover {
             text-decoration: underline;
-        }
-
-        .profile-box {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 15px;
-        }
-
-        .profile-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 8px;
-        }
-
-        .location {
-            margin-top: 15px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .location::before {
-            content: "📍 ";
         }
 
         .portfolio-section {
@@ -132,41 +103,8 @@
         .portfolio-image {
             width: 100%;
             height: 180px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .ordnance-bg {
-            background: linear-gradient(135deg, #4834d4 0%, #eb4d4b 100%);
-        }
-
-        .scoop-bg {
-            background: linear-gradient(135deg, #0c2461 0%, #ff793f 100%);
-        }
-
-        .welltodo-bg {
-            background: linear-gradient(135deg, #000000 0%, #434343 100%);
-        }
-
-        .rawmeat-bg {
-            background: linear-gradient(135deg, #e55d87 0%, #5fc3e4 100%);
-        }
-
-        .energy-bg {
-            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-        }
-
-        .silence-bg {
-            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-        }
-
-        /* New background classes for added portfolio items */
-        .garden-bg {
-            background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%);
-        }
-
-        .sustain-bg {
-            background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         .portfolio-content {
@@ -220,11 +158,9 @@
         </div>
 
         <div class="bio-section">
-            <p>Aspiring Journalist at American High School. Editor for the Eagle Era. Intern/writer for the Tri-City Voice. 
-            Interested in homelessness, immigration, and politics</p>
-            
-            <p>Email: <a href="mailto:shivgurjar4000@gmail.com" class="contact-info">shivgurjar4000@gmail.com</a>.</p>
-            <p>Linkedin: <a href="https://www.linkedin.com/in/shiv-gurjar-12899a270/" class="contact-info">Shiv Gurjar</a>.</p>
+            <p>Aspiring Journalist at American High School. Editor for the Eagle Era. Intern/writer for the Tri-City Voice. Interested in homelessness, immigration, and politics.</p>
+            <p>Email: <a href="mailto:shivgurjar4000@gmail.com" class="contact-info">shivgurjar4000@gmail.com</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/shiv-gurjar-12899a270/" class="contact-info">Shiv Gurjar</a></p>
         </div>
     </div>
 
@@ -232,8 +168,9 @@
         <h2 class="section-title">Portfolio</h2>
         
         <div class="portfolio-grid">
+            <!-- Portfolio items with images -->
             <a href="https://eagleera.org/2025/05/19/a-silent-world-a-loud-heart/" class="portfolio-item">
-                <div class="portfolio-image ordnance-bg"></div>
+                <img src="images/silent-world.jpg" alt="A silent world, a loud heart" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -244,7 +181,7 @@
             </a>
 
             <a href="https://eagleera.org/2025/02/28/trumps-immigration-order-alters-protections-for-undocumented-students/" class="portfolio-item">
-                <div class="portfolio-image scoop-bg"></div>
+                <img src="images/trump-immigration.jpg" alt="Trump's immigration order alters protections for undocumented students" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -255,7 +192,7 @@
             </a>
 
             <a href="https://eagleera.org/2025/03/15/fremonts-new-ban-on-homeless-camping/" class="portfolio-item">
-                <div class="portfolio-image welltodo-bg"></div>
+                <img src="images/fremont-homeless.jpg" alt="Fremont's new ban on homeless camping" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -266,7 +203,7 @@
             </a>
 
             <a href="https://eagleera.org/2025/02/16/the-hidden-costs-of-ahs-sports/" class="portfolio-item">
-                <div class="portfolio-image rawmeat-bg"></div>
+                <img src="images/ahs-sports.jpg" alt="The hidden costs of AHS sports" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -277,7 +214,7 @@
             </a>
 
             <a href="https://eagleera.org/2025/02/07/why-digital-hall-passes-are-of-benefit-to-students/" class="portfolio-item">
-                <div class="portfolio-image energy-bg"></div>
+                <img src="images/digital-hall-passes.jpg" alt="Why digital hall passes are of benefit to students" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -288,7 +225,7 @@
             </a>
 
             <a href="https://eagleera.org/2025/01/19/girls-basketball-wins-in-a-close-match-against-castro-valley/" class="portfolio-item">
-                <div class="portfolio-image silence-bg"></div>
+                <img src="images/girls-basketball.jpg" alt="Girls basketball wins in a close match against Castro Valley" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -299,7 +236,7 @@
             </a>
 
             <a href="https://eagleera.org/2024/12/12/how-performative-politics-failed/" class="portfolio-item">
-                <div class="portfolio-image ordnance-bg"></div>
+                <img src="images/performative-politics.jpg" alt="How performative politics failed" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -310,7 +247,7 @@
             </a>
 
             <a href="https://eagleera.org/2024/12/10/fremonts-veil-on-property-crime/" class="portfolio-item">
-                <div class="portfolio-image scoop-bg"></div>
+                <img src="images/property-crime.jpg" alt="Fremont's veil on property crime" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -321,7 +258,7 @@
             </a>
 
             <a href="https://example.com/sustainable-eating" class="portfolio-item">
-                <div class="portfolio-image sustain-bg"></div>
+                <img src="images/sustainable-eating.jpg" alt="Exploring sustainable eating habits" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
@@ -332,7 +269,7 @@
             </a>
 
             <a href="https://example.com/community-gardens" class="portfolio-item">
-                <div class="portfolio-image garden-bg"></div>
+                <img src="images/community-gardens.jpg" alt="Community gardens bringing neighborhoods together" class="portfolio-image">
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Shiv Gurjar</span>
