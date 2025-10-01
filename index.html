@@ -136,8 +136,8 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
         .portfolio-item {
@@ -159,11 +159,11 @@
 
         .portfolio-image {
             width: 100%;
-            height: 220px;
+            height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: white;
         }
@@ -193,27 +193,28 @@
         }
 
         .portfolio-content {
-            padding: 25px;
+            padding: 15px;
         }
 
         .portfolio-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .portfolio-title {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
             font-weight: 500;
+            line-height: 1.3;
         }
 
         .portfolio-description {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #555;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         @media (max-width: 768px) {
