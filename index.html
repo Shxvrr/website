@@ -1,93 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Shiv Gurjar — Student Journalist in the Bay Area.">
-  <title>Shiv Gurjar</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Georgia, serif;
-      background-color: #ffffff;
-      color: #1a1a1a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-    }
+import { Card, CardContent } from "@/components/ui/card";
+import { Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
-    h1 {
-      font-size: 2.3rem;
-      margin: 0.5rem 0;
-    }
+export default function Portfolio() {
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-800 px-6 md:px-20 py-12">
+      {/* Header Layout with Image Right */}
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        {/* Left Side Bio */}
+        <div>
+          <h1 className="text-3xl font-bold">Dominica</h1>
+          <p className="text-gray-500">Copywriter, Freelance · United Kingdom</p>
+          <p className="mt-4 text-lg">Lost for words? Let me help you.</p>
+          <p className="mt-2 text-gray-600">
+            Food enthusiast, waste warrior, and all-year-round wild swimmer, I create engaging, impactful copy adaptable to your needs. The proof is in the reading so scroll down for a selection of my work.
+          </p>
+          <p className="mt-2 text-gray-600">
+            Currently enrolled onto an online Copywriting course by the College of Media and Publishing.
+          </p>
+          <div className="mt-4 flex items-center gap-2">
+            <Mail className="w-5 h-5 text-gray-700" />
+            <a
+              href="mailto:dominica.c.taylor@gmail.com"
+              className="underline text-blue-600"
+            >
+              dominica.c.taylor@gmail.com
+            </a>
+          </div>
+        </div>
 
-    p {
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 1.5rem;
-    }
+        {/* Right Side Picture */}
+        <motion.img
+          src="/profile.jpg"
+          alt="Profile"
+          className="w-72 h-72 rounded-2xl object-cover justify-self-center"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        />
+      </div>
 
-    .grid {
-      display: grid;
-      gap: 1.2rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      width: 100%;
-      max-width: 800px;
-    }
+      {/* Portfolio Section */}
+      <div className="max-w-6xl mx-auto mt-16">
+        <h2 className="text-2xl font-semibold mb-6">Portfolio</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* Example Cards with Links */}
+          <a
+            href="https://www.ordnancesurvey.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block transform transition hover:scale-105"
+          >
+            <Card className="shadow-md rounded-2xl h-full">
+              <CardContent className="p-4">
+                <h3 className="font-semibold">Ordnance Survey | Wildlime</h3>
+                <p className="mt-2 text-sm font-medium">
+                  Proofread Video Script & Subtitles
+                </p>
+                <p className="text-gray-600 mt-1 text-sm">
+                  OS Maps App video tutorial. Available on YouTube mid-March.
+                </p>
+              </CardContent>
+            </Card>
+          </a>
 
-    .card {
-      background-color: #f5f5f5;
-      border-radius: 8px;
-      padding: 1.2rem 1.4rem;
-      text-decoration: none;
-      color: #1a1a1a;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+          <a
+            href="https://scoop.coop/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block transform transition hover:scale-105"
+          >
+            <Card className="shadow-md rounded-2xl h-full">
+              <CardContent className="p-4">
+                <h3 className="font-semibold">The Sustainable Cooperative</h3>
+                <p className="mt-2 text-sm font-medium">
+                  SCOOPLOOP: A Transition to The Circular Economy
+                </p>
+                <p className="text-gray-600 mt-1 text-sm">
+                  A policy document detailing The Sustainable Cooperative’s strategy for managing waste and enhancing more circular systems.
+                </p>
+              </CardContent>
+            </Card>
+          </a>
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    }
+          <a
+            href="https://www.welltodoglobal.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block transform transition hover:scale-105"
+          >
+            <Card className="shadow-md rounded-2xl h-full">
+              <CardContent className="p-4">
+                <h3 className="font-semibold">Welltodo</h3>
+                <p className="mt-2 text-sm font-medium">
+                  Demand for Plant-Based Protein Sparks Product Innovation
+                </p>
+                <p className="text-gray-600 mt-1 text-sm">
+                  With the plant-based protein market predicted to reach $27B by 2025, food brands big and small are innovating rapidly.
+                </p>
+              </CardContent>
+            </Card>
+          </a>
 
-    .card h2 {
-      margin: 0 0 0.5rem;
-      font-size: 1.2rem;
-    }
+          <a
+            href="https://www.airbnb.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block transform transition hover:scale-105"
+          >
+            <Card className="shadow-md rounded-2xl h-full">
+              <CardContent className="p-4">
+                <h3 className="font-semibold">Luxury Beach House Rental</h3>
+                <p className="mt-2 text-sm font-medium">
+                  Email, Weekly Blog, Welcome Docs
+                </p>
+                <p className="text-gray-600 mt-1 text-sm">
+                  Content created from March 2019 – December 2020.
+                </p>
+              </CardContent>
+            </Card>
+          </a>
 
-    .card p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #444;
-    }
+          <a
+            href="https://www.holistica.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block transform transition hover:scale-105"
+          >
+            <Card className="shadow-md rounded-2xl h-full">
+              <CardContent className="p-4">
+                <h3 className="font-semibold">Holistica</h3>
+                <p className="mt-2 text-sm font-medium">Greening the Future</p>
+                <p className="text-gray-600 mt-1 text-sm">
+                  Exploring sustainable energy and eco-conscious living in today’s world.
+                </p>
+              </CardContent>
+            </Card>
+          </a>
 
-    footer {
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      color: #999;
-    }
-  </style>
-</head>
-<body>
-  <h1>Shiv Gurjar</h1>
-  <p>High School journalist in the Bay Area.
-    Interested in homelessness, immigration, and features.</p>
-
-  <div class="grid">
-    <a class="card" href="https://everythingshivgurjar.blogspot.com/" target="_blank">
-      <h2>Writing Portfolio</h2>
-      <p>Stories, essays, and reporting samples.</p>
-    </a>
-    <a class="card" href="https://www.linkedin.com/in/shiv-gurjar-12899a270/" target="_blank">
-      <h2>LinkedIn</h2>
-      <p>Professional profile and experience.</p>
-    </a>
-    <!-- <a class="card" href="https://x.com/Shxvrr" target="_blank">
-      <h2>Twitter (X)</h2>
-      <p>Short-form commentary and updates.</p>
-    </a> -->
-  </div>
-
-</body>
-</html>
+          <a
+            href="https://www.holistica.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block transform transition hover:scale-105"
+          >
+            <Card className="shadow-md rounded-2xl h-full">
+              <CardContent className="p-4">
+                <h3 className="font-semibold">Holistica</h3>
+                <p className="mt-2 text-sm font-medium">The Sound of Silence</p>
+                <p className="text-gray-600 mt-1 text-sm">
+                  Reflections on mindfulness, stillness, and living with purpose.
+                </p>
+              </CardContent>
+            </Card>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
