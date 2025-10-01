@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Newsreader', 'Georgia', serif;
             background-color: #f8f8f8;
             color: #333;
             line-height: 1.6;
@@ -23,31 +23,26 @@
             margin: 0 auto;
             padding: 25px 30px 15px 30px;
             display: grid;
-            grid-template-columns: 1fr 250px;
-            gap: 40px;
+            grid-template-columns: auto 1fr;
+            gap: 60px;
             align-items: start;
         }
 
         .bio-section {
-            padding-right: 20px;
+            max-width: 100%;
         }
 
-        .bio-section h1 {
+        .name-section h1 {
             font-size: 2.8rem;
             margin-bottom: 6px;
             font-weight: 400;
+            white-space: nowrap;
         }
 
-        .bio-section .subtitle {
+        .name-section .subtitle {
             font-size: 0.95rem;
             color: #666;
-            margin-bottom: 12px;
-        }
-
-        .bio-section .tagline {
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            color: #555;
+            margin-bottom: 0;
         }
 
         .bio-section p {
@@ -208,17 +203,15 @@
 </head>
 <body>
     <div class="header">
-        <div class="bio-section">
+        <div class="name-section">
             <h1>Dominica</h1>
             <div class="subtitle">Copywriter, Freelance</div>
-            
+        </div>
+
+        <div class="bio-section">
             <p>Food enthusiast, waste warrior, and all-year-round wild swimmer, I create engaging, impactful copy adaptable to your needs. The proof is in the reading so scroll down for a selection of my work.</p>
             
             <p>Let's connect: <a href="mailto:dominica.c.taylor@gmail.com" class="contact-info">dominica.c.taylor@gmail.com</a>.</p>
-        </div>
-
-        <div class="profile-box">
-            <div class="profile-image"></div>
         </div>
     </div>
 
