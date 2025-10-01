@@ -1,161 +1,357 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Mail } from "lucide-react";
-import { motion } from "framer-motion";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dominica - Copywriter Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-export default function Portfolio() {
-  return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 px-6 md:px-20 py-12">
-      {/* Header Layout with Image Right */}
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-        {/* Left Side Bio */}
-        <div>
-          <h1 className="text-3xl font-bold">Dominica</h1>
-          <p className="text-gray-500">Copywriter, Freelance · United Kingdom</p>
-          <p className="mt-4 text-lg">Lost for words? Let me help you.</p>
-          <p className="mt-2 text-gray-600">
-            Food enthusiast, waste warrior, and all-year-round wild swimmer, I create engaging, impactful copy adaptable to your needs. The proof is in the reading so scroll down for a selection of my work.
-          </p>
-          <p className="mt-2 text-gray-600">
-            Currently enrolled onto an online Copywriting course by the College of Media and Publishing.
-          </p>
-          <div className="mt-4 flex items-center gap-2">
-            <Mail className="w-5 h-5 text-gray-700" />
-            <a
-              href="mailto:dominica.c.taylor@gmail.com"
-              className="underline text-blue-600"
-            >
-              dominica.c.taylor@gmail.com
-            </a>
-          </div>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .bio-section {
+            padding-right: 40px;
+        }
+
+        .bio-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .bio-section .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .bio-section .tagline {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        .bio-section p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .contact-info {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact-info:hover {
+            text-decoration: underline;
+        }
+
+        .link-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #666;
+            border-radius: 50%;
+            margin-top: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .link-icon:hover {
+            background-color: #333;
+        }
+
+        .link-icon::after {
+            content: "🔗";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+
+        .profile-box {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .location {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .location::before {
+            content: "📍 ";
+        }
+
+        .portfolio-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
+            font-weight: 400;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .ordnance-bg {
+            background: linear-gradient(135deg, #4834d4 0%, #eb4d4b 100%);
+        }
+
+        .scoop-bg {
+            background: linear-gradient(135deg, #0c2461 0%, #ff793f 100%);
+        }
+
+        .welltodo-bg {
+            background: linear-gradient(135deg, #000000 0%, #434343 100%);
+        }
+
+        .rawmeat-bg {
+            background: linear-gradient(135deg, #e55d87 0%, #5fc3e4 100%);
+        }
+
+        .energy-bg {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+        }
+
+        .silence-bg {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+        }
+
+        .portfolio-content {
+            padding: 25px;
+        }
+
+        .portfolio-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-title {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .portfolio-description {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+
+            .bio-section {
+                padding-right: 0;
+            }
+
+            .bio-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .portfolio-section {
+                padding: 20px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="bio-section">
+            <h1>Dominica</h1>
+            <div class="subtitle">Copywriter, Freelance</div>
+            <div class="tagline">Lost for words? Let me help you.</div>
+            
+            <p>Food enthusiast, waste warrior, and all-year-round wild swimmer, I create engaging, impactful copy adaptable to your needs. The proof is in the reading so scroll down for a selection of my work.</p>
+            
+            <p>Let's connect: <a href="mailto:dominica.c.taylor@gmail.com" class="contact-info">dominica.c.taylor@gmail.com</a>.</p>
+            
+            <p>Currently enrolled onto an online Copywriting course by the College of Media and Publishing.</p>
+            
+            <p>References and more samples available upon request.</p>
+            
+            <div class="link-icon"></div>
         </div>
 
-        {/* Right Side Picture */}
-        <motion.img
-          src="/profile.jpg"
-          alt="Profile"
-          className="w-72 h-72 rounded-2xl object-cover justify-self-center"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        />
-      </div>
-
-      {/* Portfolio Section */}
-      <div className="max-w-6xl mx-auto mt-16">
-        <h2 className="text-2xl font-semibold mb-6">Portfolio</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {/* Example Cards with Links */}
-          <a
-            href="https://www.ordnancesurvey.co.uk/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block transform transition hover:scale-105"
-          >
-            <Card className="shadow-md rounded-2xl h-full">
-              <CardContent className="p-4">
-                <h3 className="font-semibold">Ordnance Survey | Wildlime</h3>
-                <p className="mt-2 text-sm font-medium">
-                  Proofread Video Script & Subtitles
-                </p>
-                <p className="text-gray-600 mt-1 text-sm">
-                  OS Maps App video tutorial. Available on YouTube mid-March.
-                </p>
-              </CardContent>
-            </Card>
-          </a>
-
-          <a
-            href="https://scoop.coop/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block transform transition hover:scale-105"
-          >
-            <Card className="shadow-md rounded-2xl h-full">
-              <CardContent className="p-4">
-                <h3 className="font-semibold">The Sustainable Cooperative</h3>
-                <p className="mt-2 text-sm font-medium">
-                  SCOOPLOOP: A Transition to The Circular Economy
-                </p>
-                <p className="text-gray-600 mt-1 text-sm">
-                  A policy document detailing The Sustainable Cooperative’s strategy for managing waste and enhancing more circular systems.
-                </p>
-              </CardContent>
-            </Card>
-          </a>
-
-          <a
-            href="https://www.welltodoglobal.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block transform transition hover:scale-105"
-          >
-            <Card className="shadow-md rounded-2xl h-full">
-              <CardContent className="p-4">
-                <h3 className="font-semibold">Welltodo</h3>
-                <p className="mt-2 text-sm font-medium">
-                  Demand for Plant-Based Protein Sparks Product Innovation
-                </p>
-                <p className="text-gray-600 mt-1 text-sm">
-                  With the plant-based protein market predicted to reach $27B by 2025, food brands big and small are innovating rapidly.
-                </p>
-              </CardContent>
-            </Card>
-          </a>
-
-          <a
-            href="https://www.airbnb.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block transform transition hover:scale-105"
-          >
-            <Card className="shadow-md rounded-2xl h-full">
-              <CardContent className="p-4">
-                <h3 className="font-semibold">Luxury Beach House Rental</h3>
-                <p className="mt-2 text-sm font-medium">
-                  Email, Weekly Blog, Welcome Docs
-                </p>
-                <p className="text-gray-600 mt-1 text-sm">
-                  Content created from March 2019 – December 2020.
-                </p>
-              </CardContent>
-            </Card>
-          </a>
-
-          <a
-            href="https://www.holistica.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block transform transition hover:scale-105"
-          >
-            <Card className="shadow-md rounded-2xl h-full">
-              <CardContent className="p-4">
-                <h3 className="font-semibold">Holistica</h3>
-                <p className="mt-2 text-sm font-medium">Greening the Future</p>
-                <p className="text-gray-600 mt-1 text-sm">
-                  Exploring sustainable energy and eco-conscious living in today’s world.
-                </p>
-              </CardContent>
-            </Card>
-          </a>
-
-          <a
-            href="https://www.holistica.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block transform transition hover:scale-105"
-          >
-            <Card className="shadow-md rounded-2xl h-full">
-              <CardContent className="p-4">
-                <h3 className="font-semibold">Holistica</h3>
-                <p className="mt-2 text-sm font-medium">The Sound of Silence</p>
-                <p className="text-gray-600 mt-1 text-sm">
-                  Reflections on mindfulness, stillness, and living with purpose.
-                </p>
-              </CardContent>
-            </Card>
-          </a>
+        <div class="profile-box">
+            <div class="profile-image">DT</div>
+            <div class="location">United Kingdom</div>
         </div>
-      </div>
     </div>
-  );
-}
+
+    <div class="portfolio-section">
+        <h2 class="section-title">Portfolio</h2>
+        
+        <div class="portfolio-grid">
+            <a href="https://wildline.org.uk" class="portfolio-item">
+                <div class="portfolio-image ordnance-bg">
+                    ORDNANCE SURVEY
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-meta">
+                        <span>Ordnance Survey | Wildline</span>
+                        <span></span>
+                    </div>
+                    <h3 class="portfolio-title">Proofread Video Script & Subtitles</h3>
+                    <p class="portfolio-description">OS Maps App video tutorial. Available on Youtube mid-March.</p>
+                </div>
+            </a>
+
+            <a href="https://www.thesustainablecooperative.com" class="portfolio-item">
+                <div class="portfolio-image scoop-bg">
+                    SCOOP
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-meta">
+                        <span>The Sustainable Cooperative</span>
+                        <span></span>
+                    </div>
+                    <h3 class="portfolio-title">SCOOPLOOP: A Transition to The Circular Economy</h3>
+                    <p class="portfolio-description">A policy document detailing The Sustainable Cooperative's strategy for streamlining waste management and creating more circular systems. Authors: Dominica Taylor, India Hamilton, Rosie Hill.</p>
+                </div>
+            </a>
+
+            <a href="https://www.welltodo.co" class="portfolio-item">
+                <div class="portfolio-image welltodo-bg">
+                    WELLTODO
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-meta">
+                        <span>Welltodo</span>
+                        <span>02/18/2020</span>
+                    </div>
+                    <h3 class="portfolio-title">Demand for Plant-Based Protein Sparks Product Innovation</h3>
+                    <p class="portfolio-description">With the global plant-based protein market predicted to reach by 2025, food brands big and small are racing to cash in on innovation to meet rising demand from health-conscious consumers – and investment is rife.</p>
+                </div>
+            </a>
+
+            <a href="https://example.com/rawmeat" class="portfolio-item">
+                <div class="portfolio-image rawmeat-bg">
+                    RAW MEAT
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-meta">
+                        <span>Portfolio Item</span>
+                        <span></span>
+                    </div>
+                    <h3 class="portfolio-title">Food Photography & Writing</h3>
+                    <p class="portfolio-description">A collection of culinary photography and recipe writing showcasing seasonal ingredients and sustainable cooking practices.</p>
+                </div>
+            </a>
+
+            <a href="https://example.com/energy" class="portfolio-item">
+                <div class="portfolio-image energy-bg">
+                    ENERGY
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-meta">
+                        <span>Magazine Article</span>
+                        <span></span>
+                    </div>
+                    <h3 class="portfolio-title">Sustainable Energy Solutions</h3>
+                    <p class="portfolio-description">An in-depth article exploring renewable energy initiatives and their impact on local communities and the environment.</p>
+                </div>
+            </a>
+
+            <a href="https://example.com/silence" class="portfolio-item">
+                <div class="portfolio-image silence-bg">
+                    SILENCE
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-meta">
+                        <span>Creative Writing</span>
+                        <span></span>
+                    </div>
+                    <h3 class="portfolio-title">Reflective Essays</h3>
+                    <p class="portfolio-description">A series of contemplative pieces exploring the intersection of nature, mindfulness, and sustainable living practices.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
