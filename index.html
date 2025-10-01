@@ -21,7 +21,7 @@
         .header {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 30px;
+            padding: 30px 30px 20px 30px;
             display: grid;
             grid-template-columns: 1fr 250px;
             gap: 40px;
@@ -33,26 +33,26 @@
         }
 
         .bio-section h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            margin-bottom: 8px;
             font-weight: 400;
         }
 
         .bio-section .subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .bio-section .tagline {
-            font-size: 1rem;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
             color: #555;
         }
 
         .bio-section p {
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
             color: #444;
         }
 
@@ -63,31 +63,6 @@
 
         .contact-info:hover {
             text-decoration: underline;
-        }
-
-        .link-icon {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background-color: #666;
-            border-radius: 50%;
-            margin-top: 20px;
-            position: relative;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .link-icon:hover {
-            background-color: #333;
-        }
-
-        .link-icon::after {
-            content: "🔗";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 18px;
         }
 
         .profile-box {
@@ -103,11 +78,6 @@
             height: 250px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3.5rem;
         }
 
         .location {
@@ -161,12 +131,8 @@
         .portfolio-image {
             width: 100%;
             height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
+            background-size: cover;
+            background-position: center;
         }
 
         .ordnance-bg {
@@ -206,16 +172,10 @@
         }
 
         .portfolio-title {
-            font-size: 1.25rem;
-            margin-bottom: 10px;
+            font-size: 1.15rem;
+            margin-bottom: 0;
             font-weight: 500;
             line-height: 1.3;
-        }
-
-        .portfolio-description {
-            font-size: 0.88rem;
-            color: #555;
-            line-height: 1.5;
         }
 
         @media (max-width: 768px) {
@@ -256,12 +216,10 @@
             <p>Currently enrolled onto an online Copywriting course by the College of Media and Publishing.</p>
             
             <p>References and more samples available upon request.</p>
-            
-            <div class="link-icon"></div>
         </div>
 
         <div class="profile-box">
-            <div class="profile-image">DT</div>
+            <div class="profile-image"></div>
             <div class="location">United Kingdom</div>
         </div>
     </div>
@@ -271,86 +229,68 @@
         
         <div class="portfolio-grid">
             <a href="https://wildline.org.uk" class="portfolio-item">
-                <div class="portfolio-image ordnance-bg">
-                    ORDNANCE SURVEY
-                </div>
+                <div class="portfolio-image ordnance-bg"></div>
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Ordnance Survey | Wildline</span>
                         <span></span>
                     </div>
                     <h3 class="portfolio-title">Proofread Video Script & Subtitles</h3>
-                    <p class="portfolio-description">OS Maps App video tutorial. Available on Youtube mid-March.</p>
                 </div>
             </a>
 
             <a href="https://www.thesustainablecooperative.com" class="portfolio-item">
-                <div class="portfolio-image scoop-bg">
-                    SCOOP
-                </div>
+                <div class="portfolio-image scoop-bg"></div>
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>The Sustainable Cooperative</span>
                         <span></span>
                     </div>
                     <h3 class="portfolio-title">SCOOPLOOP: A Transition to The Circular Economy</h3>
-                    <p class="portfolio-description">A policy document detailing The Sustainable Cooperative's strategy for streamlining waste management and creating more circular systems. Authors: Dominica Taylor, India Hamilton, Rosie Hill.</p>
                 </div>
             </a>
 
             <a href="https://www.welltodo.co" class="portfolio-item">
-                <div class="portfolio-image welltodo-bg">
-                    WELLTODO
-                </div>
+                <div class="portfolio-image welltodo-bg"></div>
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Welltodo</span>
                         <span>02/18/2020</span>
                     </div>
                     <h3 class="portfolio-title">Demand for Plant-Based Protein Sparks Product Innovation</h3>
-                    <p class="portfolio-description">With the global plant-based protein market predicted to reach by 2025, food brands big and small are racing to cash in on innovation to meet rising demand from health-conscious consumers – and investment is rife.</p>
                 </div>
             </a>
 
             <a href="https://example.com/rawmeat" class="portfolio-item">
-                <div class="portfolio-image rawmeat-bg">
-                    RAW MEAT
-                </div>
+                <div class="portfolio-image rawmeat-bg"></div>
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Portfolio Item</span>
                         <span></span>
                     </div>
                     <h3 class="portfolio-title">Food Photography & Writing</h3>
-                    <p class="portfolio-description">A collection of culinary photography and recipe writing showcasing seasonal ingredients and sustainable cooking practices.</p>
                 </div>
             </a>
 
             <a href="https://example.com/energy" class="portfolio-item">
-                <div class="portfolio-image energy-bg">
-                    ENERGY
-                </div>
+                <div class="portfolio-image energy-bg"></div>
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Magazine Article</span>
                         <span></span>
                     </div>
                     <h3 class="portfolio-title">Sustainable Energy Solutions</h3>
-                    <p class="portfolio-description">An in-depth article exploring renewable energy initiatives and their impact on local communities and the environment.</p>
                 </div>
             </a>
 
             <a href="https://example.com/silence" class="portfolio-item">
-                <div class="portfolio-image silence-bg">
-                    SILENCE
-                </div>
+                <div class="portfolio-image silence-bg"></div>
                 <div class="portfolio-content">
                     <div class="portfolio-meta">
                         <span>Creative Writing</span>
                         <span></span>
                     </div>
                     <h3 class="portfolio-title">Reflective Essays</h3>
-                    <p class="portfolio-description">A series of contemplative pieces exploring the intersection of nature, mindfulness, and sustainable living practices.</p>
                 </div>
             </a>
         </div>
