@@ -376,53 +376,13 @@
         </div>
     </div>
 
-    <section class="writing-section" aria-label="Writing activity from Google Docs">
-        <div class="writing-card">
-            <div class="writing-card-header">
-                <h2 class="writing-card-title" id="heatmap-summary">Loading writing activity…</h2>
-                <span class="writing-card-source">
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="#4285F4"/>
-                        <path d="M14 2v6h6" fill="#A1C2FA"/>
-                        <path d="M8 13h8M8 17h8M8 9h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    Google Docs
-                </span>
-            </div>
-            <div class="writing-card-body">
-                <div class="heatmap-main">
-                    <div class="heatmap-months" id="heatmap-months"></div>
-                    <div class="heatmap-layout">
-                        <div class="heatmap-day-labels" aria-hidden="true">
-                            <span>Sun</span>
-                            <span>Mon</span>
-                            <span>Tue</span>
-                            <span>Wed</span>
-                            <span>Thu</span>
-                            <span>Fri</span>
-                            <span>Sat</span>
-                        </div>
-                        <div class="heatmap-grid" id="heatmap-grid"></div>
-                    </div>
-                    <div class="heatmap-footer">
-                        <span>Word counts tracked across all Google Docs</span>
-                        <div class="heatmap-legend">
-                            <span>Less</span>
-                            <div class="heatmap-legend-cells" id="heatmap-legend-cells"></div>
-                            <span>More</span>
-                        </div>
-                    </div>
-                </div>
-                <nav class="heatmap-years" id="heatmap-years" aria-label="Select year"></nav>
-            </div>
-        </div>
-    </section>
 
     <div class="portfolio-section">
         <h2 class="section-title">Portfolio</h2>
         
         <div class="portfolio-grid">
             <!-- Portfolio items with images -->
+
             <a href="https://eagleera.org/2025/05/19/a-silent-world-a-loud-heart/" class="portfolio-item">
                 <img src="0b6c8731-17a2-4cf1-a8bd-d4894707d097 (1).webp" alt="A silent world, a loud heart" class="portfolio-image">
                 <div class="portfolio-content">
@@ -545,6 +505,49 @@
             </a>
         </div>
     </div>
+
+    <section class="writing-section" aria-label="Writing activity from Google Docs">
+        <div class="writing-card">
+            <div class="writing-card-header">
+                <h2 class="writing-card-title" id="heatmap-summary">Loading writing activity…</h2>
+                <span class="writing-card-source">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="#4285F4"/>
+                        <path d="M14 2v6h6" fill="#A1C2FA"/>
+                        <path d="M8 13h8M8 17h8M8 9h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Google Docs
+                </span>
+            </div>
+            <div class="writing-card-body">
+                <div class="heatmap-main">
+                    <div class="heatmap-months" id="heatmap-months"></div>
+                    <div class="heatmap-layout">
+                        <div class="heatmap-day-labels" aria-hidden="true">
+                            <span>Sun</span>
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                        </div>
+                        <div class="heatmap-grid" id="heatmap-grid"></div>
+                    </div>
+                    <div class="heatmap-footer">
+                        <span>Word counts tracked across all Google Docs</span>
+                        <div class="heatmap-legend">
+                            <span>Less</span>
+                            <div class="heatmap-legend-cells" id="heatmap-legend-cells"></div>
+                            <span>More</span>
+                        </div>
+                    </div>
+                </div>
+                <nav class="heatmap-years" id="heatmap-years" aria-label="Select year"></nav>
+            </div>
+        </div>
+    </section>
+
     <script src="writing-heatmap.js"></script>
 </body>
 </html>
