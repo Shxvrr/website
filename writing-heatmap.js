@@ -3,16 +3,13 @@
   const COLORS_DARK = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  // Leave empty to use writing-activity.json in this repo.
-  // After deploying the Google Apps Script web app, paste its URL here:
-  // Example: 'https://script.google.com/macros/s/AKfycb.../exec'
   const DATA_URL = 'https://script.google.com/macros/s/AKfycbxsE-yBx8rgJPmVeuzBcMgf2Ba8hrmpW5e_IKbUA9T7GnKedehC40Se_WSyio9pi_WTgQ/exec';
 
   const THRESHOLDS = [1, 250, 750, 1500];
 
   let dailyWords = {};
   let selectedYear = new Date().getFullYear();
-  let useDarkTheme = true;
+  let lastUpdated = '';
 
   function formatDateKey(date) {
     const y = date.getFullYear();
@@ -21,8 +18,39 @@
     return `${y}-${m}-${d}`;
   }
 
+  function normalizeDateKey(key) {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(key)) {
+      return key;
+    }
+
+    const parsed = new Date(key);
+    if (!isNaN(parsed.getTime())) {
+      return formatDateKey(parsed);
+    }
+
+    return null;
+  }
+
+  function normalizeDailyWords(raw) {
+    const normalized = {};
+
+    Object.entries(raw || {}).forEach(function ([key, words]) {
+      const dateKey = normalizeDateKey(key);
+      const count = Number(words) || 0;
+      if (dateKey && count > 0) {
+        normalized[dateKey] = count;
+      }
+    });
+
+    return normalized;
+  }
+
   function parseDateKey(key) {
-    const [y, m, d] = key.split('-').map(Number);
+    const normalized = normalizeDateKey(key);
+    if (!normalized) {
+      return new Date(NaN);
+    }
+    const [y, m, d] = normalized.split('-').map(Number);
     return new Date(y, m - 1, d);
   }
 
@@ -35,7 +63,7 @@
   }
 
   function getColors() {
-    return useDarkTheme ? COLORS_DARK : COLORS;
+    return COLORS_DARK;
   }
 
   function startOfWeek(date) {
@@ -52,9 +80,22 @@
   }
 
   function getAvailableYears() {
-    const years = new Set([new Date().getFullYear()]);
-    Object.keys(dailyWords).forEach((key) => years.add(parseDateKey(key).getFullYear()));
-    return [...years].sort((a, b) => b - a);
+    const years = new Set();
+
+    Object.keys(dailyWords).forEach(function (key) {
+      const year = parseDateKey(key).getFullYear();
+      if (!isNaN(year)) {
+        years.add(year);
+      }
+    });
+
+    if (years.size === 0) {
+      years.add(new Date().getFullYear());
+    }
+
+    return [...years].sort(function (a, b) {
+      return b - a;
+    });
   }
 
   function getDateRange(year) {
@@ -63,9 +104,11 @@
     const currentYear = today.getFullYear();
 
     if (year === currentYear) {
-      const end = today;
-      const start = addDays(end, -364);
-      return { start, end, mode: 'rolling' };
+      return {
+        start: addDays(today, -364),
+        end: today,
+        mode: 'rolling',
+      };
     }
 
     return {
@@ -96,14 +139,17 @@
   function countWordsInRange(start, end) {
     let total = 0;
     const cursor = new Date(start);
+
     while (cursor <= end) {
       total += dailyWords[formatDateKey(cursor)] || 0;
       cursor.setDate(cursor.getDate() + 1);
     }
+
     return total;
   }
 
   function formatNumber(n) {
+    if (!isFinite(n)) return '0';
     return n.toLocaleString('en-US');
   }
 
@@ -119,18 +165,21 @@
   function renderSummary(total, mode) {
     const label = total === 1 ? 'word' : 'words';
     const period = mode === 'rolling' ? ' in the last year' : ` in ${selectedYear}`;
-    return `${formatNumber(total)} ${label} written${period}`;
+    const updated = lastUpdated ? ` · Updated ${lastUpdated}` : '';
+    return `${formatNumber(total)} ${label} written${period}${updated}`;
   }
 
   function renderMonthLabels(weeks, container) {
     container.innerHTML = '';
     let lastMonth = -1;
 
-    weeks.forEach((week, index) => {
+    weeks.forEach(function (week, index) {
       const label = document.createElement('span');
       label.className = 'heatmap-month-label';
 
-      const visibleDay = week.find((day) => day.getMonth() !== lastMonth) || week[0];
+      const visibleDay = week.find(function (day) {
+        return day.getMonth() !== lastMonth;
+      }) || week[0];
       const month = visibleDay.getMonth();
 
       if (month !== lastMonth) {
@@ -138,7 +187,7 @@
         lastMonth = month;
       }
 
-      label.style.gridColumn = `${index + 1}`;
+      label.style.gridColumn = String(index + 1);
       container.appendChild(label);
     });
   }
@@ -149,13 +198,13 @@
     const colors = getColors();
 
     grid.innerHTML = '';
-    grid.style.gridTemplateColumns = `repeat(${weeks.length}, 1fr)`;
+    grid.style.gridTemplateColumns = `repeat(${weeks.length}, 11px)`;
 
     renderMonthLabels(weeks, months);
-    months.style.gridTemplateColumns = `repeat(${weeks.length}, 1fr)`;
+    months.style.gridTemplateColumns = `repeat(${weeks.length}, 11px)`;
 
-    weeks.forEach((week, weekIndex) => {
-      week.forEach((day, dayIndex) => {
+    weeks.forEach(function (week, weekIndex) {
+      week.forEach(function (day, dayIndex) {
         const cell = document.createElement('div');
         const inRange = day >= start && day <= end;
         const count = inRange ? dailyWords[formatDateKey(day)] || 0 : 0;
@@ -163,16 +212,15 @@
 
         cell.className = 'heatmap-cell';
         cell.style.backgroundColor = inRange ? colors[level] : 'transparent';
-        cell.style.gridColumn = weekIndex + 1;
-        cell.style.gridRow = dayIndex + 1;
+        cell.style.gridColumn = String(weekIndex + 1);
+        cell.style.gridRow = String(dayIndex + 1);
 
         if (inRange) {
           const tooltip = document.createElement('div');
           tooltip.className = 'heatmap-tooltip';
-          tooltip.textContent =
-            count > 0
-              ? `${formatNumber(count)} words on ${formatTooltipDate(day)}`
-              : `No words written on ${formatTooltipDate(day)}`;
+          tooltip.textContent = count > 0
+            ? `${formatNumber(count)} words on ${formatTooltipDate(day)}`
+            : `No words written on ${formatTooltipDate(day)}`;
           cell.appendChild(tooltip);
         } else {
           cell.style.visibility = 'hidden';
@@ -187,12 +235,12 @@
     const nav = document.getElementById('heatmap-years');
     nav.innerHTML = '';
 
-    years.forEach((year) => {
+    years.forEach(function (year) {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'heatmap-year-btn' + (year === selectedYear ? ' is-active' : '');
-      btn.textContent = year;
-      btn.addEventListener('click', () => {
+      btn.textContent = String(year);
+      btn.addEventListener('click', function () {
         selectedYear = year;
         render();
       });
@@ -205,7 +253,7 @@
     const colors = getColors();
     legend.innerHTML = '';
 
-    colors.forEach((color) => {
+    colors.forEach(function (color) {
       const cell = document.createElement('div');
       cell.className = 'heatmap-legend-cell';
       cell.style.backgroundColor = color;
@@ -214,28 +262,46 @@
   }
 
   function render() {
-    const { start, end, mode } = getDateRange(selectedYear);
-    const weeks = buildWeeks(start, end);
-    const total = countWordsInRange(start, end);
     const years = getAvailableYears();
 
-    document.getElementById('heatmap-summary').textContent = renderSummary(total, mode);
-    renderGrid(weeks, start, end);
+    if (!years.includes(selectedYear)) {
+      selectedYear = years[0];
+    }
+
+    const range = getDateRange(selectedYear);
+    const weeks = buildWeeks(range.start, range.end);
+    const total = countWordsInRange(range.start, range.end);
+
+    document.getElementById('heatmap-summary').textContent = renderSummary(total, range.mode);
+    renderGrid(weeks, range.start, range.end);
     renderYearNav(years);
     renderLegend();
   }
 
+  async function fetchJson(url) {
+    const response = await fetch(url, {
+      redirect: 'follow',
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    return response.json();
+  }
+
   async function init() {
     const sources = DATA_URL
-      ? [DATA_URL, 'writing-activity.json']
-      : ['writing-activity.json'];
+      ? [`${DATA_URL}?t=${Date.now()}`, `writing-activity.json?t=${Date.now()}`]
+      : [`writing-activity.json?t=${Date.now()}`];
 
     for (const source of sources) {
       try {
-        const response = await fetch(source);
-        if (response.ok) {
-          const data = await response.json();
-          dailyWords = data.dailyWords || {};
+        const data = await fetchJson(source);
+        dailyWords = normalizeDailyWords(data.dailyWords);
+        lastUpdated = data.lastUpdated || '';
+        if (Object.keys(dailyWords).length > 0) {
           break;
         }
       } catch (_) {

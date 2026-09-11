@@ -222,7 +222,7 @@ function recordTodayWordCount() {
   let existingToday = 0;
 
   for (let i = 1; i < data.length; i++) {
-    if (String(data[i][0]) === today) {
+    if (formatRowDate(data[i][0]) === today) {
       rowIndex = i + 1;
       existingToday = Number(data[i][1]) || 0;
       break;
@@ -247,16 +247,26 @@ function recordTodayWordCount() {
   );
 }
 
+function formatRowDate(value) {
+  if (Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime())) {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)) {
+    return value.slice(0, 10);
+  }
+  return String(value);
+}
+
 function buildPayload() {
   const sheet = getOrCreateSpreadsheet().getSheetByName(SHEET_NAME);
   const data = sheet.getDataRange().getValues();
   const dailyWords = {};
 
   for (let i = 1; i < data.length; i++) {
-    const date = data[i][0];
+    const dateKey = formatRowDate(data[i][0]);
     const words = Number(data[i][1]) || 0;
-    if (date && words > 0) {
-      dailyWords[String(date)] = words;
+    if (dateKey && words > 0) {
+      dailyWords[dateKey] = words;
     }
   }
 
