@@ -18,534 +18,83 @@
             font-family: 'Newsreader', 'Georgia', serif;
             background-color: #FFFFFF;
             color: #000000;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
-        .header {
-            max-width: 950px;
+        main {
+            max-width: 36rem;
             margin: 0 auto;
-            padding: 80px 30px 15px 30px;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 60px;
-            align-items: start;
+            padding: 4rem 1.5rem 5rem;
         }
 
-        .bio-section {
-            max-width: 100%;
-        }
-
-        .name-section h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0;
+        h1 {
+            font-size: 1.75rem;
             font-weight: 400;
-            white-space: nowrap;
-            color: #000000;
+            margin-bottom: 1.25rem;
         }
 
-        .bio-section p {
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            color: #000000;
+        .bio {
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
         }
 
-        .contact-info {
+        .bio a {
             color: #0066cc;
             text-decoration: none;
         }
 
-        .contact-info:hover {
+        .bio a:hover {
             text-decoration: underline;
         }
 
-        .portfolio-section {
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 0px 30px 30px 30px;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #333;
-            font-weight: 400;
-            width: 100%;
-            text-indent: -9999px;
-            height: 0;
-            margin-top: 30px;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 100%;
-        }
-
-        .portfolio-item {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .portfolio-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .portfolio-content {
-            padding: 16px;
-        }
-
-        .portfolio-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: #000000;
-            margin-bottom: 10px;
-        }
-
-        .portfolio-title {
-            font-size: 1.05rem;
-            margin-bottom: 0;
+        h2 {
+            font-size: 1rem;
             font-weight: 500;
-            line-height: 1.3;
-            color: #000000;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
         }
 
-        .writing-section {
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 0 30px 40px;
+        .work-list {
+            list-style: none;
         }
 
-        .writing-card {
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 16px;
-            color: #c9d1d9;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+        .work-list li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
         }
 
-        .writing-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            gap: 12px;
-            flex-wrap: wrap;
+        .work-list a {
+            color: #0066cc;
+            text-decoration: none;
         }
 
-        .writing-card-title {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #c9d1d9;
+        .work-list a:hover {
+            text-decoration: underline;
         }
 
-        .writing-card-source {
-            font-size: 0.75rem;
-            color: #8b949e;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .writing-card-source svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .writing-card-body {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
-        .heatmap-main {
-            flex: 1;
-            min-width: 0;
-            overflow-x: auto;
-        }
-
-        .heatmap-months {
-            display: grid;
-            font-size: 0.75rem;
-            color: #8b949e;
-            margin-bottom: 4px;
-            padding-left: 28px;
-            height: 15px;
-            position: relative;
-        }
-
-        .heatmap-month-label {
-            position: relative;
-        }
-
-        .heatmap-layout {
-            display: grid;
-            grid-template-columns: 28px 1fr;
-            gap: 4px;
-        }
-
-        .heatmap-day-labels {
-            display: grid;
-            grid-template-rows: repeat(7, 11px);
-            gap: 3px;
-            font-size: 0.625rem;
-            color: #8b949e;
-            padding-top: 2px;
-        }
-
-        .heatmap-day-labels span {
-            line-height: 11px;
-            height: 11px;
-        }
-
-        .heatmap-day-labels span:nth-child(odd) {
-            visibility: hidden;
-        }
-
-        .heatmap-grid {
-            display: grid;
-            grid-template-rows: repeat(7, 11px);
-            gap: 3px;
-        }
-
-        .heatmap-cell {
-            width: 11px;
-            height: 11px;
-            border-radius: 2px;
-            position: relative;
-            outline: 1px solid rgba(27, 31, 35, 0.06);
-            outline-offset: -1px;
-        }
-
-        .heatmap-cell:hover .heatmap-tooltip {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .heatmap-tooltip {
-            position: absolute;
-            bottom: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%);
-            background: #24292f;
-            color: #fff;
-            font-size: 0.75rem;
-            padding: 8px 10px;
-            border-radius: 6px;
-            white-space: nowrap;
-            pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.15s;
-            z-index: 10;
-            font-weight: 400;
-        }
-
-        .heatmap-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 5px solid transparent;
-            border-top-color: #24292f;
-        }
-
-        .heatmap-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 12px;
-            font-size: 0.75rem;
-            color: #8b949e;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .heatmap-legend {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .heatmap-legend-cells {
-            display: flex;
-            gap: 2px;
-            margin: 0 4px;
-        }
-
-        .heatmap-legend-cell {
-            width: 11px;
-            height: 11px;
-            border-radius: 2px;
-        }
-
-        .heatmap-years {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
-        .heatmap-year-btn {
-            background: transparent;
-            border: none;
-            color: #8b949e;
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            font-family: inherit;
-        }
-
-        .heatmap-year-btn:hover {
-            color: #58a6ff;
-        }
-
-        .heatmap-year-btn.is-active {
-            background: #388bfd;
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .writing-section {
-                padding: 0 20px 30px;
-            }
-
-            .writing-card-body {
-                flex-direction: column;
-            }
-
-            .heatmap-years {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-
-            .header {
-                grid-template-columns: 1fr;
-                padding: 40px 20px;
-            }
-
-            .bio-section {
-                padding-right: 0;
-            }
-
-            .bio-section h1 {
-                font-size: 2.5rem;
-            }
-
-            .portfolio-section {
-                padding: 20px;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
+        .work-list .date {
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="name-section">
-            <h1>Shiv Gurjar</h1>
-        </div>
+    <main>
+        <h1>Shiv Gurjar</h1>
 
-        <div class="bio-section">
-            <p>Aspiring journalist at American High School. Editor for the Eagle Era. Intern for the Tri-City Voice. Interested in reporting on homelessness, politics, and local news.</p>
-            <p>Email: <a href="mailto:shivgurjar4000@gmail.com" class="contact-info">shivgurjar4000@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/shiv-gurjar-12899a270/" class="contact-info">Shiv Gurjar</a></p>
-        </div>
-    </div>
+        <p class="bio">
+            Aspiring journalist at American High School, editor for the Eagle Era, and intern for the Tri-City Voice. I report on homelessness, politics, and local news. Reach me at <a href="mailto:shivgurjar4000@gmail.com">shivgurjar4000@gmail.com</a> or on <a href="https://www.linkedin.com/in/shiv-gurjar-12899a270/">LinkedIn</a>.
+        </p>
 
-    <div class="portfolio-section">
-        <h2 class="section-title">Portfolio</h2>
-        
-        <div class="portfolio-grid">
-            <!-- Portfolio items with images -->
-            <a href="https://eagleera.org/2025/05/19/a-silent-world-a-loud-heart/" class="portfolio-item">
-                <img src="0b6c8731-17a2-4cf1-a8bd-d4894707d097 (1).webp" alt="A silent world, a loud heart" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Feature</span>
-                    </div>
-                    <h3 class="portfolio-title">A silent world, a loud heart</h3>
-                </div>
-            </a>
-
-            <a href="https://eagleera.org/2025/02/28/trumps-immigration-order-alters-protections-for-undocumented-students/" class="portfolio-item">
-                <img src="eagleeralogo-edited (1).jpg" alt="Trump's immigration order alters protections for undocumented students" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>News</span>
-                    </div>
-                    <h3 class="portfolio-title">Trump's immigration order alters protections for undocumented students</h3>
-                </div>
-            </a>
-
-            <a href="https://eagleera.org/2025/03/15/fremonts-new-ban-on-homeless-camping/" class="portfolio-item">
-                <img src="february-opinion-politics-humor-drafts-feb-19-2025-at-2_25-am.jpg" alt="Fremont's new ban on homeless camping" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>News</span>
-                    </div>
-                    <h3 class="portfolio-title">Fremont's new ban on homeless camping</h3>
-                </div>
-            </a>
-
-            <a href="https://eagleera.org/2025/02/16/the-hidden-costs-of-ahs-sports/" class="portfolio-item">
-                <img src="eagleeralogo-edited (1).jpg" alt="The hidden costs of AHS sports" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Sports</span>
-                    </div>
-                    <h3 class="portfolio-title">The hidden costs of AHS sports</h3>
-                </div>
-            </a>
-
-            <a href="https://eagleera.org/2025/02/07/why-digital-hall-passes-are-of-benefit-to-students/" class="portfolio-item">
-                <img src="eagleeralogo-edited (1).jpg" alt="Why digital hall passes are of benefit to students" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Opinion</span>
-                    </div>
-                    <h3 class="portfolio-title">Why digital hall passes are of benefit to students</h3>
-                </div>
-            </a>
-
-            <a href="https://eagleera.org/2025/01/19/girls-basketball-wins-in-a-close-match-against-castro-valley/" class="portfolio-item">
-                <img src="img_0736.webp" alt="Girls basketball wins in a close match against Castro Valley" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Sports</span>
-                    </div>
-                    <h3 class="portfolio-title">Girls basketball wins in a close match against Castro Valley</h3>
-                </div>
-            </a>
-
-            <a href="https://eagleera.org/2024/12/12/how-performative-politics-failed/" class="portfolio-item">
-                <img src="genzphotopolitics.webp" alt="How performative politics failed" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Opinion</span>
-                    </div>
-                    <h3 class="portfolio-title">How performative politics failed</h3>
-                </div>
-            </a>
-
-            <a href="https://eagleera.org/2024/12/10/fremonts-veil-on-property-crime/" class="portfolio-item">
-                <img src="november-news-events-sports-coverage-drafts-nov-18-2024-at-9_18-am.webp" alt="Fremont's veil on property crime" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>News</span>
-                    </div>
-                    <h3 class="portfolio-title">Fremont's veil on property crime</h3>
-                </div>
-            </a>
-
-            <a href="https://tricityvoice.com/letter-to-the-editor-native-americans-a-group-we-have-forgotten/" class="portfolio-item">
-                <img src="download (17).jpeg" alt="Native Americans—A group we have forgotten" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Letter to the Editor</span>
-                    </div>
-                    <h3 class="portfolio-title">Native Americans—A group we have forgotten</h3>
-                </div>
-            </a>
-
-            <a href="https://tricityvoice.com/bay-area-holds-september-coastal-cleanup" class="portfolio-item">
-                <img src="TCoastal-Cleanup-Day-2023.jpg" alt="Bay Area holds September Coastal Cleanup" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Local News</span>
-                    </div>
-                    <h3 class="portfolio-title">Bay Area holds September Coastal Cleanup</h3>
-                </div>
-            </a>
-
-            <a href="Girl scouts raise awareness on the dangers of artificial turf.pdf" class="portfolio-item">
-                <img src="download (17).jpeg" alt="Girl Scouts raise awareness on the dangers of artificial turf" class="portfolio-image">
-                <div class="portfolio-content">
-                    <div class="portfolio-meta">
-                        <span>Shiv Gurjar</span>
-                        <span>Local News</span>
-                    </div>
-                    <h3 class="portfolio-title">Girl scouts raise awareness on the dangers of artificial turf</h3>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <section class="writing-section" aria-label="Writing activity from Google Docs">
-        <div class="writing-card">
-            <div class="writing-card-header">
-                <h2 class="writing-card-title" id="heatmap-summary">Loading writing activity…</h2>
-                <span class="writing-card-source">
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="#4285F4"/>
-                        <path d="M14 2v6h6" fill="#A1C2FA"/>
-                        <path d="M8 13h8M8 17h8M8 9h4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    Google Docs
-                </span>
-            </div>
-            <div class="writing-card-body">
-                <div class="heatmap-main">
-                    <div class="heatmap-months" id="heatmap-months"></div>
-                    <div class="heatmap-layout">
-                        <div class="heatmap-day-labels" aria-hidden="true">
-                            <span>Sun</span>
-                            <span>Mon</span>
-                            <span>Tue</span>
-                            <span>Wed</span>
-                            <span>Thu</span>
-                            <span>Fri</span>
-                            <span>Sat</span>
-                        </div>
-                        <div class="heatmap-grid" id="heatmap-grid"></div>
-                    </div>
-                    <div class="heatmap-footer">
-                        <span>Word counts tracked from your Google Docs writing folder</span>
-                        <div class="heatmap-legend">
-                            <span>Less</span>
-                            <div class="heatmap-legend-cells" id="heatmap-legend-cells"></div>
-                            <span>More</span>
-                        </div>
-                    </div>
-                </div>
-                <nav class="heatmap-years" id="heatmap-years" aria-label="Select year"></nav>
-            </div>
-        </div>
-    </section>
-
-    <script src="writing-heatmap.js"></script>
+        <h2>Selected work</h2>
+        <ul class="work-list">
+            <li><a href="https://tricityvoice.com/bay-area-holds-september-coastal-cleanup">Bay Area holds September Coastal Cleanup</a> <span class="date">September 16, 2025</span></li>
+            <li><a href="https://eagleera.org/2025/05/19/a-silent-world-a-loud-heart/">A silent world, a loud heart</a> <span class="date">May 19, 2025</span></li>
+            <li><a href="https://eagleera.org/2025/03/15/fremonts-new-ban-on-homeless-camping/">Fremont's new ban on homeless camping</a> <span class="date">March 15, 2025</span></li>
+            <li><a href="https://eagleera.org/2025/02/28/trumps-immigration-order-alters-protections-for-undocumented-students/">Trump's immigration order alters protections for undocumented students</a> <span class="date">February 28, 2025</span></li>
+            <li><a href="https://tricityvoice.com/letter-to-the-editor-native-americans-a-group-we-have-forgotten/">Native Americans—A group we have forgotten</a> <span class="date">December 31, 2024</span></li>
+            <li><a href="https://eagleera.org/2024/12/12/how-performative-politics-failed/">How performative politics failed</a> <span class="date">December 12, 2024</span></li>
+            <li><a href="https://eagleera.org/2024/12/10/fremonts-veil-on-property-crime/">Fremont's veil on property crime</a> <span class="date">December 10, 2024</span></li>
+        </ul>
+    </main>
 </body>
 </html>
