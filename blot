@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Shiv Gurjar</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #263b4d;
+      --paper: #42a5f5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, serif;
+    }
+
+    .page {
+      width: min(900px, 100%);
+      margin: 0 auto;
+      padding: 38px 28px 64px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 30px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: 0;
+      color: var(--ink);
+      font-size: 2rem;
+      font-weight: 500;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="back-link" href="index.html">← Home</a>
+    <h1 id="random-heading">Blog test</h1>
+  </main>
+
+  <script>
+    const heading = document.getElementById('random-heading');
+    const margin = 12;
+    heading.style.left = `${margin + Math.random() * (100 - margin * 2)}%`;
+    heading.style.top = `${margin + Math.random() * (100 - margin * 2)}vh`;
+  </script>
+</body>
+</html>
