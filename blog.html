@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog posts by Shiv Gurjar.">
+  <title>Blog | Shiv Gurjar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #555c68;
+      --muted: #737985;
+      --paper: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+    }
+
+    .page {
+      width: min(900px, 100%);
+      margin: 0 auto;
+      padding: 38px 36px 64px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    h1 {
+      margin: 0 0 24px;
+      color: var(--ink);
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 720px;
+    }
+
+    .post-list li { margin: 0 0 23px; }
+
+    .post-title {
+      display: inline-block;
+      margin-bottom: 3px;
+      color: var(--ink);
+      font-size: 1.45rem;
+      font-weight: 600;
+      line-height: 1.25;
+      text-decoration: none;
+    }
+
+    .post-title:hover { text-decoration: underline; }
+
+    .post-date {
+      display: block;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 0.98rem;
+    }
+
+    .empty-note {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 28px 20px 48px; }
+      .post-title { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="back-link" href="index.html">← Home</a>
+    <h1>Blog</h1>
+
+    <!-- To publish a post, add a list item with its title, link, and date below. -->
+    <ul class="post-list" aria-label="Blog posts">
+      <li class="empty-note">New posts coming soon.</li>
+    </ul>
+  </main>
+</body>
+</html>
