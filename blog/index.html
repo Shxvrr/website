@@ -137,6 +137,15 @@
       text-align: center;
     }
 
+    .page.post-view #page-title {
+      text-align: center;
+    }
+    
+    .post-content {
+      text-align: center;
+    }
+
+
     @media (max-width: 600px) {
       .page {
         padding: 28px 20px 48px;
@@ -311,12 +320,14 @@
 
       function showList() {
         titleElement.textContent = 'Blog';
+        document.querySelector('.page').classList.remove('post-view');
         backLink.href = '../index.html';
         backLink.textContent = '← Home';
         contentElement.hidden = true;
         list.hidden = false;
         status.hidden = true;
         list.replaceChildren();
+        
 
         if (!posts.length) {
           status.textContent = 'No Markdown posts found in the Blogs folder.';
@@ -354,6 +365,7 @@
         titleElement.textContent = post.title;
         backLink.href = '/blog/';
         backLink.textContent = '← All posts';
+        document.querySelector('.page').classList.add('post-view');
 
         contentElement.innerHTML = post.html;
 
