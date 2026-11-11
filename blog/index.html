@@ -1,3 +1,6 @@
+Use this full version of the file and save it as blog/index.html if you want the clean URL /blog/:
+
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +16,10 @@
     :root {
       --ink: #17212b;
       --muted: #263b4d;
-      --paper: #AEB8FE;
+      --paper: #42a5f5;
     }
 
     * { box-sizing: border-box; }
-    
-    
 
     body {
       margin: 0;
@@ -30,7 +31,7 @@
     }
 
     .page {
-      width: min(940px, 100%);
+      width: min(1120px, 100%);
       margin: 0 auto;
       padding: 38px 28px 64px;
     }
@@ -49,15 +50,23 @@
     }
 
     h1 {
-      margin: 0 0 24px;
+      width: min(980px, 100%);
+      margin: 0 auto 24px;
       font-size: 2rem;
       font-weight: 500;
       line-height: 1.2;
     }
 
+    .status {
+      width: min(980px, 100%);
+      margin: 0 auto 1em;
+      color: var(--muted);
+    }
+
     .post-list {
-      max-width: 760px;
-      margin: 0;
+      width: min(980px, 100%);
+      max-width: 980px;
+      margin: 0 auto;
       padding: 0;
       list-style: none;
     }
@@ -78,15 +87,13 @@
       display: block;
       margin-top: 3px;
       color: var(--muted);
-      font: 0.96rem Arial, sans-serif;
-    }
-
-    .status {
-      color: var(--muted);
+      font: .96rem Arial, sans-serif;
     }
 
     .post-content {
-      max-width: 720px;
+      width: min(980px, 100%);
+      max-width: 980px;
+      margin: 0 auto;
       font-size: 1.12rem;
       overflow-wrap: anywhere;
     }
