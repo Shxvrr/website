@@ -18,6 +18,7 @@
 
     * { box-sizing: border-box; }
     
+    
 
     body {
       margin: 0;
@@ -141,10 +142,9 @@
 </head>
 <body>
   <main class="page">
-    <a href=“/blog”> blog</a>
-    <a class="back-link" id="back-link" href="index.html">← Home</a>
-    <h1 id="page-title">Blog</h1>
+    <a class="back-link" id="back-link" href="../index.html">← Home</a>
     <p class="status" id="status">Loading posts…</p>
+    <a href="/blog/">Blog →</a>
     <ul class="post-list" id="post-list" aria-label="Blog posts"></ul>
     <article class="post-content" id="post-content" hidden></article>
   </main>
@@ -309,7 +309,7 @@
 
           const link = document.createElement('a');
           link.className = 'post-link';
-          link.href = `blog.html?post=${encodeURIComponent(post.slug)}`;
+          link.href = `blog?post=${encodeURIComponent(post.slug)}`;
           link.textContent = post.title;
 
           const date = document.createElement('span');
@@ -332,7 +332,8 @@
         status.hidden = true;
         contentElement.hidden = false;
         titleElement.textContent = post.title;
-        backLink.href = 'blog.html';
+        backLink.href = '/blog/';
+        
         backLink.textContent = '← All posts';
 
         contentElement.innerHTML = post.html;
