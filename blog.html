@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #555c68;
-      --muted: #737985;
-      --paper: #fff;
+      --ink: #17212b;
+      --muted: #263b4d;
+      --paper: #42a5f5;
     }
 
     * { box-sizing: border-box; }
@@ -38,7 +38,8 @@
       text-decoration: none;
     }
 
-    .back-link:hover { text-decoration: underline; }
+    .back-link:hover,
+    .post-title:hover { text-decoration: underline; }
 
     h1 {
       margin: 0 0 24px;
@@ -61,12 +62,10 @@
       margin-bottom: 3px;
       color: var(--ink);
       font-size: 1.45rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 1.25;
       text-decoration: none;
     }
-
-    .post-title:hover { text-decoration: underline; }
 
     .post-date {
       display: block;
@@ -75,7 +74,7 @@
       font-size: 0.98rem;
     }
 
-    .empty-note {
+    .status-message {
       color: var(--muted);
       font-size: 1.05rem;
     }
@@ -90,11 +89,89 @@
   <main class="page">
     <a class="back-link" href="index.html">← Home</a>
     <h1>Blog</h1>
-
-    <!-- To publish a post, add a list item with its title, link, and date below. -->
-    <ul class="post-list" aria-label="Blog posts">
-      <li class="empty-note">New posts coming soon.</li>
+    <ul class="post-list" id="post-list" aria-label="Blog posts" aria-live="polite">
+      <li class="status-message">Loading posts…</li>
     </ul>
   </main>
+
+  <script>
+    (async function loadBlogPosts() {
+      const list = document.getElementById('post-list');
+      const apiUrl = 'https://api.github.com/repos/Shxvrr/website/contents/blogs?ref=main';
+
+      function readFrontMatter(markdown) {
+        const match = markdown.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
+        const fields = {};
+        if (match) {
+          match[1].split(/\r?\n/).forEach((line) => {
+            const field = line.match(/^([\w-]+):\s*(.*?)\s*$/);
+            if (field) fields[field[1].toLowerCase()] = field[2].replace(/^['"]|['"]$/g, '');
+          });
+        }
+        return fields;
+      }
+
+      function displayDate(value) {
+        if (!value) return '';
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'
+        });
+      }
+
+      try {
+        const response = await fetch(apiUrl, { headers: { Accept: 'application/vnd.github+json' } });
+        if (!response.ok) throw new Error('Could not read the blogs folder.');
+        const files = await response.json();
+        const markdownFiles = files.filter((file) => file.type === 'file' && /\.md$/i.test(file.name));
+
+        const posts = await Promise.all(markdownFiles.map(async (file) => {
+          const markdownResponse = await fetch(file.download_url);
+          if (!markdownResponse.ok) throw new Error(`Could not load ${file.name}.`);
+          const markdown = await markdownResponse.text();
+          const metadata = readFrontMatter(markdown);
+          const fallbackTitle = file.name.replace(/\.md$/i, '').replace(/[-_]/g, ' ');
+          const dateValue = metadata.date || '';
+          return {
+            title: metadata.title || fallbackTitle,
+            date: dateValue,
+            displayDate: displayDate(dateValue),
+            url: file.html_url,
+            sortDate: dateValue ? new Date(dateValue).getTime() : 0
+          };
+        }));
+
+        posts.sort((a, b) => b.sortDate - a.sortDate || a.title.localeCompare(b.title));
+        list.replaceChildren();
+        if (posts.length === 0) {
+          const empty = document.createElement('li');
+          empty.className = 'status-message';
+          empty.textContent = 'No blog posts yet. Add a Markdown file to the blogs folder and push it to GitHub.';
+          list.appendChild(empty);
+          return;
+        }
+
+        posts.forEach((post) => {
+          const item = document.createElement('li');
+          const link = document.createElement('a');
+          link.className = 'post-title';
+          link.href = post.url;
+          link.textContent = post.title;
+          const date = document.createElement('span');
+          date.className = 'post-date';
+          date.textContent = post.displayDate;
+          item.append(link, date);
+          list.appendChild(item);
+        });
+      } catch (error) {
+        list.replaceChildren();
+        const message = document.createElement('li');
+        message.className = 'status-message';
+        message.textContent = 'Posts could not be loaded. Make sure the repository and blogs folder are public, then refresh the page.';
+        list.appendChild(message);
+        console.error(error);
+      }
+    })();
+  </script>
 </body>
 </html>
