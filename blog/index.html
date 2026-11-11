@@ -140,7 +140,16 @@
     .page.post-view #page-title {
       text-align: center;
     }
+    
+    .page:not(.post-view) #page-title,
+.page:not(.post-view) .post-list {
+  text-align: left;
+}
 
+.page:not(.post-view) .post-list {
+  margin-left: 0;
+  margin-right: auto;
+}
 
     @media (max-width: 600px) {
       .page {
