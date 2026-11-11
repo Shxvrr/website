@@ -1,253 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shiv Gurjar</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shiv Gurjar's journalism portfolio and blog.">
+  <title>Shiv Gurjar | Journalism</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f5f2;
-      --paper: #f3f1ee;
-      --text: #3b4047;
-      --muted: #7d8591;
-      --line: rgba(100, 110, 122, 0.35);
-      --accent: #5e6b7b;
-      --heading: #474d57;
+      color-scheme: light;
+      --ink: #343840;
+      --muted: #737985;
+      --rule: #c9cbd0;
+      --paper: #fff;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Georgia, "Times New Roman", serif;
-    }
+    * { box-sizing: border-box; }
 
     body {
-      min-height: 100vh;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      line-height: 1.5;
     }
 
     .page {
-      max-width: 1280px;
+      width: min(1120px, 100%);
       margin: 0 auto;
-      padding: 36px 40px 60px;
+      padding: 48px 36px 64px;
     }
 
-    .content-wrap {
+    .intro {
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      line-height: 1.2;
+      font-weight: 500;
+      color: #555c68;
+    }
+
+    .blurb {
+      max-width: 640px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.8fr) 260px;
-      gap: 36px;
+      grid-template-columns: minmax(0, 1fr) 150px;
+      gap: 44px;
       align-items: start;
     }
 
-    .main-column {
-      padding-top: 8px;
-    }
-
-    .post-list {
+    .article-list {
       list-style: none;
       margin: 0;
       padding: 0;
     }
 
-    .post-item {
-      position: relative;
-      padding: 12px 0 12px 26px;
-      border-bottom: 1px dashed var(--line);
+    .article-list li {
+      padding: 9px 0 10px;
+      border-bottom: 1px dotted var(--rule);
+      font-size: 1.15rem;
       line-height: 1.4;
     }
 
-    .post-item::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      top: 16px;
-      font-size: 1.1rem;
-      color: var(--heading);
-    }
-
-    .post-link {
+    .article-link {
+      color: var(--ink);
       text-decoration: none;
-      color: var(--heading);
-      font-size: clamp(1.3rem, 2vw, 2.05rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      display: inline;
-      line-height: 1.25;
+      text-decoration-line: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: #b6b9bf;
+      text-underline-offset: 4px;
     }
 
-    .post-link em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--muted);
-    }
+    .article-link:hover { color: #667387; }
 
-    .source {
+    .article-source {
       color: var(--muted);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(1.15rem, 1.7vw, 1.8rem);
+      font-size: 1rem;
       white-space: nowrap;
     }
 
     .sidebar {
-      padding-top: 12px;
+      border-left: 1px solid #e0e1e4;
+      padding: 2px 0 2px 18px;
     }
 
-    .sidebar-box {
-      border-left: 1px solid var(--line);
-      padding-left: 18px;
-    }
-
-    .sidebar-title {
+    .sidebar h2 {
+      margin: 0 0 8px;
+      color: #555c68;
       font-size: 1.15rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--heading);
-      margin: 0 0 18px;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      font-weight: 700;
+      font-weight: 600;
     }
 
-    .sidebar-links {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .sidebar-links a {
-      color: var(--heading);
+    .sidebar a {
+      color: var(--muted);
+      font-size: 1rem;
       text-decoration: none;
-      font-size: 1.05rem;
-      line-height: 1.4;
-      font-family: Georgia, serif;
     }
 
-    .sidebar-links a:hover {
-      text-decoration: underline;
-    }
+    .sidebar a:hover { text-decoration: underline; }
 
-    @media (max-width: 860px) {
-      .page {
-        padding: 28px 20px 40px;
+    @media (max-width: 700px) {
+      .page { padding: 32px 20px 48px; }
+      .layout { grid-template-columns: 1fr; gap: 24px; }
+      .sidebar {
+        border-left: 0;
+        border-top: 1px solid #e0e1e4;
+        padding: 14px 0 0;
       }
-
-      .content-wrap {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar-box {
-        border-left: none;
-        border-top: 1px solid var(--line);
-        padding-left: 0;
-        padding-top: 18px;
-      }
+      .article-list li { font-size: 1.05rem; }
+      .article-source { font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="content-wrap">
-      <main class="main-column">
-        <ul class="post-list">
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              Ro Khanna and the fight for the post-Bernie left
-            </a>
-            <span class="source">, The Hill <em>10.26</em></span>
-          </li>
+  <main class="page">
+    <header class="intro">
+      <h1>Shiv Gurjar</h1>
+      <p class="blurb">Aspiring journalist at American High School, editor for the Eagle Era and intern for the Tri-City Voice. I’m interested in reporting on homelessness, politics and local news.</p>
+    </header>
 
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              Can voters learn to stop worrying and love Big AI?
-            </a>
-            <span class="source">, The Hill <em>10.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              What's in a foreign-sounding name? Trump's first House primary loss
-            </a>
-            <span class="source">, The Hill <em>8.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              What James Fishback reveals about the new populist right
-            </a>
-            <span class="source">, The Hill <em>7.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              Can the Mamdani machine kill the Democratic establishment?
-            </a>
-            <span class="source">, The Hill <em>7.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              Splits among progressives may lead to some unsavory results in California primaries
-            </a>
-            <span class="source">, The Hill <em>5.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              Race to replace Nancy Pelosi tests limits of liberal Zionism
-            </a>
-            <span class="source">, UnHerd <em>4.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              What would it take for Republicans to win California's gubernatorial race?
-            </a>
-            <span class="source">, The Hill <em>3.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              Progressive gains in Illinois 9th District race challenge Israel lobby
-            </a>
-            <span class="source">, The Hill <em>3.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              Could the next Alexandria Ocasio-Cortez emerge from San Francisco?
-            </a>
-            <span class="source">, The Hill <em>2.26</em></span>
-          </li>
-
-          <li class="post-item">
-            <a class="post-link" href="blog.html">
-              How incompetence and being 'a little too trusting' tanked a governor
-            </a>
-            <span class="source">, The Hill <em>1.26</em></span>
-          </li>
+    <div class="layout">
+      <section aria-label="Selected journalism">
+        <ul class="article-list">
+          <li><a class="article-link" href="https://eagleera.org/2025/05/19/a-silent-world-a-loud-heart/">A silent world, a loud heart</a><span class="article-source">, Eagle Era · May 19, 2025</span></li>
+          <li><a class="article-link" href="https://eagleera.org/2025/02/28/trumps-immigration-order-alters-protections-for-undocumented-students/">Trump’s immigration order alters protections for undocumented students</a><span class="article-source">, Eagle Era · Feb. 28, 2025</span></li>
+          <li><a class="article-link" href="https://eagleera.org/2025/03/15/fremonts-new-ban-on-homeless-camping/">Fremont’s new ban on homeless camping</a><span class="article-source">, Eagle Era · Mar. 15, 2025</span></li>
+          <li><a class="article-link" href="https://eagleera.org/2025/02/16/the-hidden-costs-of-ahs-sports/">The hidden costs of AHS sports</a><span class="article-source">, Eagle Era · Feb. 16, 2025</span></li>
+          <li><a class="article-link" href="https://eagleera.org/2025/02/07/why-digital-hall-passes-are-of-benefit-to-students/">Why digital hall passes are of benefit to students</a><span class="article-source">, Eagle Era · Feb. 7, 2025</span></li>
+          <li><a class="article-link" href="https://eagleera.org/2025/01/19/girls-basketball-wins-in-a-close-match-against-castro-valley/">Girls basketball wins in a close match against Castro Valley</a><span class="article-source">, Eagle Era · Jan. 19, 2025</span></li>
+          <li><a class="article-link" href="https://eagleera.org/2024/12/12/how-performative-politics-failed/">How performative politics failed</a><span class="article-source">, Eagle Era · Dec. 12, 2024</span></li>
+          <li><a class="article-link" href="https://eagleera.org/2024/12/10/fremonts-veil-on-property-crime/">Fremont’s veil on property crime</a><span class="article-source">, Eagle Era · Dec. 10, 2024</span></li>
+          <li><a class="article-link" href="https://tricityvoice.com/letter-to-the-editor-native-americans-a-group-we-have-forgotten/">Native Americans—A group we have forgotten</a><span class="article-source">, Tri-City Voice</span></li>
+          <li><a class="article-link" href="https://tricityvoice.com/bay-area-holds-september-coastal-cleanup">Bay Area holds September Coastal Cleanup</a><span class="article-source">, Tri-City Voice</span></li>
+          <li><a class="article-link" href="Girl%20scouts%20raise%20awareness%20on%20the%20dangers%20of%20artificial%20turf.pdf">Girl Scouts raise awareness on the dangers of artificial turf</a><span class="article-source">, Tri-City Voice</span></li>
         </ul>
-      </main>
+      </section>
 
-      <aside class="sidebar">
-        <div class="sidebar-box">
-          <h2 class="sidebar-title">Blog</h2>
-          <ul class="sidebar-links">
-            <li><a href="blog.html">Latest posts</a></li>
-            <li><a href="blog.html">Reporting</a></li>
-            <li><a href="blog.html">Essays</a></li>
-            <li><a href="blog.html">Opinion</a></li>
-            <li><a href="blog.html">Archive</a></li>
-          </ul>
-        </div>
-      </aside>
+      <nav class="sidebar" aria-label="Site navigation">
+        <h2>Blog</h2>
+        <a href="blog.html">Read the blog →</a>
+      </nav>
     </div>
-  </div>
+  </main>
 </body>
 </html>
