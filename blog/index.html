@@ -1,4 +1,4 @@
-Use this full version of the file and save it as blog/index.html if you want the clean URL /blog/:
+Use this as the full file for blog/index.html:
 
 HTML
 <!DOCTYPE html>
@@ -16,7 +16,9 @@ HTML
     :root {
       --ink: #17212b;
       --muted: #263b4d;
-      --paper: #42a5f5;
+      --paper: #eef3f7;
+      --accent: #42a5f5;
+      --rule: rgba(23, 33, 43, 0.2);
     }
 
     * { box-sizing: border-box; }
@@ -27,20 +29,20 @@ HTML
       background: var(--paper);
       color: var(--ink);
       font-family: 'Newsreader', Georgia, serif;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .page {
-      width: min(1120px, 100%);
+      width: min(860px, 100%);
       margin: 0 auto;
-      padding: 38px 28px 64px;
+      padding: 36px 24px 72px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       color: var(--muted);
-      font-size: .98rem;
+      font-size: 0.96rem;
       text-decoration: none;
     }
 
@@ -50,25 +52,24 @@ HTML
     }
 
     h1 {
-      width: min(980px, 100%);
-      margin: 0 auto 24px;
-      font-size: 2rem;
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 500;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     .status {
-      width: min(980px, 100%);
-      margin: 0 auto 1em;
       color: var(--muted);
+      margin: 0 0 22px;
+      font-size: 1rem;
     }
 
     .post-list {
-      width: min(980px, 100%);
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0;
       list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 760px;
     }
 
     .post-list li {
@@ -77,63 +78,66 @@ HTML
 
     .post-link {
       color: var(--ink);
-      font-size: 1.45rem;
-      font-weight: 500;
-      line-height: 1.3;
+      font-size: 1.42rem;
+      line-height: 1.35;
       text-decoration: none;
+      font-weight: 500;
     }
 
     .post-date {
       display: block;
-      margin-top: 3px;
+      margin-top: 4px;
       color: var(--muted);
-      font: .96rem Arial, sans-serif;
+      font-family: Arial, sans-serif;
+      font-size: 0.96rem;
     }
 
     .post-content {
-      width: min(980px, 100%);
-      max-width: 980px;
-      margin: 0 auto;
-      font-size: 1.12rem;
+      max-width: 760px;
+      font-size: 1.18rem;
       overflow-wrap: anywhere;
     }
 
     .post-content h2,
-    .post-content h3 {
+    .post-content h3,
+    .post-content h4 {
       margin: 1.5em 0 0.5em;
-      line-height: 1.3;
+      line-height: 1.25;
     }
 
     .post-content p {
-      margin: 0 0 1em;
+      margin: 0 0 1.2em;
     }
 
-    .post-content ul {
-      padding-left: 1.4em;
+    .post-content ul,
+    .post-content ol {
+      padding-left: 1.5em;
     }
 
     .post-content blockquote {
-      margin: 1em 0;
+      margin: 1.25em 0;
       padding-left: 1em;
-      border-left: 3px solid rgba(23,33,43,.3);
+      border-left: 3px solid var(--rule);
       color: var(--muted);
     }
 
     .post-content pre {
+      background: rgba(255,255,255,0.28);
+      border-radius: 6px;
       padding: 14px;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
-      background: rgba(255,255,255,.25);
-      border-radius: 6px;
     }
 
     .post-content code {
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
     .post-content img {
+      display: block;
       max-width: 100%;
       height: auto;
+      margin: 1em 0;
     }
 
     @media (max-width: 600px) {
@@ -142,7 +146,7 @@ HTML
       }
 
       .post-link {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -151,7 +155,9 @@ HTML
   <main class="page">
     <a class="back-link" id="back-link" href="../index.html">← Home</a>
     <h1 id="page-title">Blog</h1>
+
     <p class="status" id="status">Loading posts…</p>
+
     <ul class="post-list" id="post-list" aria-label="Blog posts"></ul>
     <article class="post-content" id="post-content" hidden></article>
   </main>
