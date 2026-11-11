@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog posts by Shiv Gurjar.">
   <title>Blog | Shiv Gurjar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #17212b;
-      --muted: #263b4d;
+      --muted: #2a3d4f;
       --paper: #42a5f5;
     }
 
@@ -15,58 +19,190 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
       background: var(--paper);
       color: var(--ink);
-      font-family: Georgia, serif;
+      font-family: 'Newsreader', Georgia, serif;
     }
 
     .page {
-      width: min(900px, 100%);
+      width: min(940px, 100%);
       margin: 0 auto;
       padding: 38px 28px 64px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
       color: var(--muted);
-      text-decoration: none;
       font-size: 0.95rem;
+      text-decoration: none;
     }
 
-    .back-link:hover { text-decoration: underline; }
+    .back-link:hover,
+    .post-title:hover { text-decoration: underline; }
 
     h1 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: 0;
+      margin: 0 0 24px;
       color: var(--ink);
       font-size: 2rem;
       font-weight: 500;
-      transform: translate(-50%, -50%);
-      white-space: nowrap;
+    }
+
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-width: 760px;
+    }
+
+    .post-list li {
+      margin: 0 0 26px;
+    }
+
+    .post-title {
+      display: inline-block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.25;
+      text-decoration: none;
+    }
+
+    .post-date {
+      display: block;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 0.96rem;
+    }
+
+    .status-message {
+      color: var(--muted);
+      font-size: 1.05rem;
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.5rem;
-      }
+      .page { padding: 28px 20px 48px; }
+      .post-title { font-size: 1.3rem; }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <a class="back-link" href="index.html">← Home</a>
-    <h1 id="random-heading">Blog test</h1>
+    <h1>Blog</h1>
+
+    <ul class="post-list" id="post-list" aria-label="Blog posts" aria-live="polite">
+      <li class="status-message">Loading posts…</li>
+    </ul>
   </main>
 
   <script>
-    const heading = document.getElementById('random-heading');
-    const margin = 12;
-    heading.style.left = `${margin + Math.random() * (100 - margin * 2)}%`;
-    heading.style.top = `${margin + Math.random() * (100 - margin * 2)}vh`;
+    (async function loadBlogPosts() {
+      const list = document.getElementById('post-list');
+      const repo = 'Shxvrr/website';
+      const ref = 'main';
+      const apiUrl = `https://api.github.com/repos/${repo}/contents/blogs?ref=${ref}`;
+
+      function parseFrontMatter(markdown) {
+        const match = markdown.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
+        const data = {};
+        if (!match) return data;
+
+        match[1].split(/\r?\n/).forEach((line) => {
+          const field = line.match(/^([\w-]+):\s*(.*?)\s*$/);
+          if (field) {
+            const key = field[1].toLowerCase();
+            const value = field[2].replace(/^['"]|['"]$/g, '');
+            data[key] = value;
+          }
+        });
+
+        return data;
+      }
+
+      function formatDate(value) {
+        if (!value) return '';
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return value;
+        return date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          timeZone: 'UTC'
+        });
+      }
+
+      try {
+        const response = await fetch(apiUrl, {
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+
+        if (!response.ok) throw new Error('Could not read the blogs folder.');
+
+        const files = await response.json();
+        const markdownFiles = files.filter(file => file.type === 'file' && /\.md$/i.test(file.name));
+
+        const posts = await Promise.all(markdownFiles.map(async (file) => {
+          const raw = await fetch(file.download_url);
+          if (!raw.ok) throw new Error(`Failed to load ${file.name}`);
+          const markdown = await raw.text();
+          const meta = parseFrontMatter(markdown);
+          const title = meta.title || file.name.replace(/\.md$/i, '').replace(/[-_]/g, ' ');
+          const dateValue = meta.date || '';
+
+          return {
+            title,
+            date: dateValue,
+            displayDate: formatDate(dateValue),
+            url: `https://github.com/${repo}/blob/main/${file.path}`
+          };
+        }));
+
+        posts.sort((a, b) => {
+          const aTime = a.date ? new Date(a.date).getTime() : 0;
+          const bTime = b.date ? new Date(b.date).getTime() : 0;
+          return bTime - aTime;
+        });
+
+        list.replaceChildren();
+
+        if (posts.length === 0) {
+          const empty = document.createElement('li');
+          empty.className = 'status-message';
+          empty.textContent = 'No blog posts yet. Add a Markdown file to the blogs folder and push it to GitHub.';
+          list.appendChild(empty);
+          return;
+        }
+
+        posts.forEach((post) => {
+          const item = document.createElement('li');
+
+          const link = document.createElement('a');
+          link.className = 'post-title';
+          link.href = post.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = post.title;
+
+          const date = document.createElement('span');
+          date.className = 'post-date';
+          date.textContent = post.displayDate;
+
+          item.appendChild(link);
+          item.appendChild(date);
+          list.appendChild(item);
+        });
+      } catch (error) {
+        list.replaceChildren();
+
+        const message = document.createElement('li');
+        message.className = 'status-message';
+        message.textContent = 'Posts could not be loaded. Make sure the blogs folder exists and the repository is public.';
+        list.appendChild(message);
+        console.error(error);
+      }
+    })();
   </script>
 </body>
 </html>
