@@ -13,12 +13,12 @@
     :root {
       --ink: #17212b;
       --muted: #263b4d;
-      --paper: #eef3f7;
-      --accent: #42a5f5;
-      --rule: rgba(23, 33, 43, 0.2);
+      --paper: #AEB8FE;
     }
 
     * { box-sizing: border-box; }
+    
+    
 
     body {
       margin: 0;
@@ -26,20 +26,20 @@
       background: var(--paper);
       color: var(--ink);
       font-family: 'Newsreader', Georgia, serif;
-      line-height: 1.65;
+      line-height: 1.6;
     }
 
     .page {
-      width: min(860px, 100%);
+      width: min(940px, 100%);
       margin: 0 auto;
-      padding: 36px 24px 72px;
+      padding: 38px 28px 64px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: .98rem;
       text-decoration: none;
     }
 
@@ -49,24 +49,17 @@
     }
 
     h1 {
-      margin: 0 0 18px;
-      color: var(--ink);
-      font-size: clamp(2rem, 4vw, 3rem);
+      margin: 0 0 24px;
+      font-size: 2rem;
       font-weight: 500;
-      line-height: 1.15;
-    }
-
-    .status {
-      color: var(--muted);
-      margin: 0 0 22px;
-      font-size: 1rem;
+      line-height: 1.2;
     }
 
     .post-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
       max-width: 760px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
     .post-list li {
@@ -75,66 +68,65 @@
 
     .post-link {
       color: var(--ink);
-      font-size: 1.42rem;
-      line-height: 1.35;
-      text-decoration: none;
+      font-size: 1.45rem;
       font-weight: 500;
+      line-height: 1.3;
+      text-decoration: none;
     }
 
     .post-date {
       display: block;
-      margin-top: 4px;
+      margin-top: 3px;
       color: var(--muted);
-      font-family: Arial, sans-serif;
-      font-size: 0.96rem;
+      font: 0.96rem Arial, sans-serif;
+    }
+
+    .status {
+      color: var(--muted);
     }
 
     .post-content {
-      max-width: 760px;
-      font-size: 1.18rem;
+      max-width: 720px;
+      font-size: 1.12rem;
       overflow-wrap: anywhere;
     }
 
     .post-content h2,
-    .post-content h3,
-    .post-content h4 {
+    .post-content h3 {
       margin: 1.5em 0 0.5em;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .post-content p {
-      margin: 0 0 1.2em;
+      margin: 0 0 1em;
     }
 
-    .post-content ul,
-    .post-content ol {
-      padding-left: 1.5em;
+    .post-content ul {
+      padding-left: 1.4em;
     }
 
     .post-content blockquote {
-      margin: 1.25em 0;
+      margin: 1em 0;
       padding-left: 1em;
-      border-left: 3px solid var(--rule);
+      border-left: 3px solid rgba(23,33,43,.3);
       color: var(--muted);
     }
 
     .post-content pre {
-      background: rgba(255,255,255,0.28);
-      border-radius: 6px;
       padding: 14px;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
+      background: rgba(255,255,255,.25);
+      border-radius: 6px;
     }
 
     .post-content code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
     }
 
     .post-content img {
-      display: block;
       max-width: 100%;
       height: auto;
-      margin: 1em 0;
     }
 
     @media (max-width: 600px) {
@@ -143,7 +135,7 @@
       }
 
       .post-link {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -152,9 +144,7 @@
   <main class="page">
     <a class="back-link" id="back-link" href="../index.html">← Home</a>
     <h1 id="page-title">Blog</h1>
-
     <p class="status" id="status">Loading posts…</p>
-
     <ul class="post-list" id="post-list" aria-label="Blog posts"></ul>
     <article class="post-content" id="post-content" hidden></article>
   </main>
