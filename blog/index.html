@@ -143,8 +143,8 @@
 <body>
   <main class="page">
     <a class="back-link" id="back-link" href="../index.html">← Home</a>
+    <h1 id="page-title">Blog</h1>
     <p class="status" id="status">Loading posts…</p>
-    <a href="/blog/">Blog →</a>
     <ul class="post-list" id="post-list" aria-label="Blog posts"></ul>
     <article class="post-content" id="post-content" hidden></article>
   </main>
@@ -177,7 +177,7 @@
 
         if (match) {
           match[1].split(/\r?\n/).forEach((line) => {
-            const field = line.match(/^([\\w-]+):\\s*(.*?)\\s*$/);
+            const field = line.match(/^([\w-]+):\s*(.*?)\s*$/);
             if (field) metadata[field[1].toLowerCase()] = field[2].replace(/^['"]|['"]$/g, '');
           });
           source = markdown.slice(match[0].length);
@@ -291,7 +291,7 @@
 
       function showList() {
         titleElement.textContent = 'Blog';
-        backLink.href = 'index.html';
+        backLink.href = '../index.html';
         backLink.textContent = '← Home';
         contentElement.hidden = true;
         list.hidden = false;
@@ -309,7 +309,7 @@
 
           const link = document.createElement('a');
           link.className = 'post-link';
-          link.href = `blog?post=${encodeURIComponent(post.slug)}`;
+          link.href = `/blog/?post=${encodeURIComponent(post.slug)}`;
           link.textContent = post.title;
 
           const date = document.createElement('span');
