@@ -55,9 +55,10 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 150px;
-      gap: 8px;
+      grid-template-columns: minmax(0, 780px) 190px;
+      gap: 24px;
       align-items: start;
+      justify-content: start;
     }
 
     .section-title {
@@ -80,6 +81,13 @@
       line-height: 1.4;
     }
 
+    .article-list li::before {
+      content: '→';
+      display: inline-block;
+      margin-right: 0.55em;
+      color: var(--ink);
+    }
+
     .article-link {
       color: var(--ink);
       text-decoration: none;
@@ -96,14 +104,14 @@
     .sidebar {
       border-left: 1px solid rgba(29, 33, 40, 0.22);
       padding: 2px 0 2px 18px;
-      margin-left: -8px;
     }
 
     .sidebar h2 {
       margin: 0 0 8px;
       color: var(--ink);
-      font-size: 1.15rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      font-weight: 500;
     }
 
     .sidebar a {
@@ -123,7 +131,6 @@
         border-left: 0;
         border-top: 1px solid rgba(29, 33, 40, 0.22);
         padding: 14px 0 0;
-        margin-left: 0;
       }
       .article-list li { font-size: 1rem; }
       .article-source { font-size: 0.92rem; }
@@ -156,8 +163,8 @@
       </section>
 
       <nav class="sidebar" aria-label="Site navigation">
-        <h2>Blog</h2>
-        <a href="blog.html">Read the blog →</a>
+        <h2>Extracurricular Reflections</h2>
+        <a href="blog.html">Blog →</a>
         <a href="https://theantrum.substack.com/" target="_blank" rel="noopener noreferrer">Substack →</a>
       </nav>
     </div>
