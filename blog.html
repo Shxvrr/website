@@ -11,7 +11,7 @@
   <style>
     :root {
       --ink: #17212b;
-      --muted: #263b4d;
+      --muted: #2a3d4f;
       --paper: #42a5f5;
     }
 
@@ -25,14 +25,14 @@
     }
 
     .page {
-      width: min(900px, 100%);
+      width: min(940px, 100%);
       margin: 0 auto;
-      padding: 38px 36px 64px;
+      padding: 38px 28px 64px;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
       color: var(--muted);
       font-size: 0.95rem;
       text-decoration: none;
@@ -52,16 +52,18 @@
       list-style: none;
       padding: 0;
       margin: 0;
-      max-width: 720px;
+      max-width: 760px;
     }
 
-    .post-list li { margin: 0 0 23px; }
+    .post-list li {
+      margin: 0 0 26px;
+    }
 
     .post-title {
       display: inline-block;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
       color: var(--ink);
-      font-size: 1.45rem;
+      font-size: 1.5rem;
       font-weight: 500;
       line-height: 1.25;
       text-decoration: none;
@@ -71,7 +73,7 @@
       display: block;
       color: var(--muted);
       font-family: Arial, sans-serif;
-      font-size: 0.98rem;
+      font-size: 0.96rem;
     }
 
     .status-message {
@@ -89,6 +91,7 @@
   <main class="page">
     <a class="back-link" href="index.html">← Home</a>
     <h1>Blog</h1>
+
     <ul class="post-list" id="post-list" aria-label="Blog posts" aria-live="polite">
       <li class="status-message">Loading posts…</li>
     </ul>
@@ -97,52 +100,73 @@
   <script>
     (async function loadBlogPosts() {
       const list = document.getElementById('post-list');
-      const apiUrl = 'https://api.github.com/repos/Shxvrr/website/contents/blogs?ref=main';
+      const repo = 'Shxvrr/website';
+      const ref = 'main';
+      const apiUrl = `https://api.github.com/repos/${repo}/contents/Blogs?ref=${ref}`;
 
-      function readFrontMatter(markdown) {
+      function parseFrontMatter(markdown) {
         const match = markdown.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
-        const fields = {};
-        if (match) {
-          match[1].split(/\r?\n/).forEach((line) => {
-            const field = line.match(/^([\w-]+):\s*(.*?)\s*$/);
-            if (field) fields[field[1].toLowerCase()] = field[2].replace(/^['"]|['"]$/g, '');
-          });
-        }
-        return fields;
+        const data = {};
+        if (!match) return data;
+
+        match[1].split(/\r?\n/).forEach((line) => {
+          const field = line.match(/^([\w-]+):\s*(.*?)\s*$/);
+          if (field) {
+            const key = field[1].toLowerCase();
+            const value = field[2].replace(/^['"]|['"]$/g, '');
+            data[key] = value;
+          }
+        });
+
+        return data;
       }
 
-      function displayDate(value) {
+      function formatDate(value) {
         if (!value) return '';
         const date = new Date(value);
-        return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('en-US', {
-          year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'
+        if (Number.isNaN(date.getTime())) return value;
+        return date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          timeZone: 'UTC'
         });
       }
 
       try {
-        const response = await fetch(apiUrl, { headers: { Accept: 'application/vnd.github+json' } });
+        const response = await fetch(apiUrl, {
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+
         if (!response.ok) throw new Error('Could not read the blogs folder.');
+
         const files = await response.json();
-        const markdownFiles = files.filter((file) => file.type === 'file' && /\.md$/i.test(file.name));
+        const markdownFiles = files.filter(file => file.type === 'file' && /\.md$/i.test(file.name));
 
         const posts = await Promise.all(markdownFiles.map(async (file) => {
-          const markdownResponse = await fetch(file.download_url);
-          if (!markdownResponse.ok) throw new Error(`Could not load ${file.name}.`);
-          const markdown = await markdownResponse.text();
-          const metadata = readFrontMatter(markdown);
-          const fallbackTitle = file.name.replace(/\.md$/i, '').replace(/[-_]/g, ' ');
-          const dateValue = metadata.date || '';
+          const raw = await fetch(file.download_url);
+          if (!raw.ok) throw new Error(`Failed to load ${file.name}`);
+          const markdown = await raw.text();
+          const meta = parseFrontMatter(markdown);
+          const title = meta.title || file.name.replace(/\.md$/i, '').replace(/[-_]/g, ' ');
+          const dateValue = meta.date || '';
+
           return {
-            title: metadata.title || fallbackTitle,
+            title,
             date: dateValue,
-            displayDate: displayDate(dateValue),
-            url: file.html_url,
-            sortDate: dateValue ? new Date(dateValue).getTime() : 0
+            displayDate: formatDate(dateValue),
+            url: `https://github.com/${repo}/blob/main/${file.path}`
           };
         }));
 
-        posts.sort((a, b) => b.sortDate - a.sortDate || a.title.localeCompare(b.title));
+        posts.sort((a, b) => {
+          const aTime = a.date ? new Date(a.date).getTime() : 0;
+          const bTime = b.date ? new Date(b.date).getTime() : 0;
+          return bTime - aTime;
+        });
+
         list.replaceChildren();
+
         if (posts.length === 0) {
           const empty = document.createElement('li');
           empty.className = 'status-message';
@@ -153,21 +177,28 @@
 
         posts.forEach((post) => {
           const item = document.createElement('li');
+
           const link = document.createElement('a');
           link.className = 'post-title';
           link.href = post.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
           link.textContent = post.title;
+
           const date = document.createElement('span');
           date.className = 'post-date';
           date.textContent = post.displayDate;
-          item.append(link, date);
+
+          item.appendChild(link);
+          item.appendChild(date);
           list.appendChild(item);
         });
       } catch (error) {
         list.replaceChildren();
+
         const message = document.createElement('li');
         message.className = 'status-message';
-        message.textContent = 'Posts could not be loaded. Make sure the repository and blogs folder are public, then refresh the page.';
+        message.textContent = 'Posts could not be loaded. Make sure the blogs folder exists and the repository is public.';
         list.appendChild(message);
         console.error(error);
       }
