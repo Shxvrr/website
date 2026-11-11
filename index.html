@@ -14,7 +14,7 @@
       --ink: #1d2128;
       --muted: #3d4450;
       --rule: #d8dce1;
-      --paper: #fff;
+      --paper: #A5D8FF;
     }
 
     * { box-sizing: border-box; }
@@ -40,10 +40,10 @@
 
     h1 {
       margin: 0 0 8px;
-      font-size: 1.7rem;
-      line-height: 1.2;
-      font-weight: 500;
-      color: #2c3138;
+      font-size: 1rem;
+      line-height: 1.5;
+      font-weight: 400;
+      color: var(--ink);
     }
 
     .blurb {
@@ -61,6 +61,14 @@
       align-items: start;
     }
 
+    .section-title {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: 1.2rem;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
     .article-list {
       list-style: none;
       margin: 0;
@@ -69,7 +77,7 @@
 
     .article-list li {
       padding: 9px 0 10px;
-      border-bottom: 1px dotted var(--rule);
+      border-bottom: 1px solid rgba(29, 33, 40, 0.18);
       font-size: 1.15rem;
       line-height: 1.42;
     }
@@ -88,18 +96,20 @@
     }
 
     .sidebar {
-      border-left: 1px solid #e7eaee;
+      border-left: 1px solid rgba(29, 33, 40, 0.22);
       padding: 2px 0 2px 18px;
     }
 
     .sidebar h2 {
       margin: 0 0 8px;
-      color: #2c3138;
+      color: var(--ink);
       font-size: 1.15rem;
       font-weight: 600;
     }
 
     .sidebar a {
+      display: block;
+      margin-bottom: 8px;
       color: var(--ink);
       font-size: 1rem;
       text-decoration: none;
@@ -112,7 +122,7 @@
       .layout { grid-template-columns: 1fr; gap: 24px; }
       .sidebar {
         border-left: 0;
-        border-top: 1px solid #e7eaee;
+        border-top: 1px solid rgba(29, 33, 40, 0.22);
         padding: 14px 0 0;
       }
       .article-list li { font-size: 1.05rem; }
@@ -128,7 +138,8 @@
     </header>
 
     <div class="layout">
-      <section aria-label="Selected journalism">
+      <section aria-labelledby="selected-writing">
+        <h2 class="section-title" id="selected-writing">Selected Writing</h2>
         <ul class="article-list">
           <li><a class="article-link" href="https://eagleera.org/2025/05/19/a-silent-world-a-loud-heart/">A silent world, a loud heart</a><span class="article-source">, Eagle Era · May 19, 2025</span></li>
           <li><a class="article-link" href="https://eagleera.org/2025/02/28/trumps-immigration-order-alters-protections-for-undocumented-students/">Trump’s immigration order alters protections for undocumented students</a><span class="article-source">, Eagle Era · Feb. 28, 2025</span></li>
@@ -147,6 +158,7 @@
       <nav class="sidebar" aria-label="Site navigation">
         <h2>Blog</h2>
         <a href="blog.html">Read the blog →</a>
+        <a href="https://theantrum.substack.com/" target="_blank" rel="noopener noreferrer">Substack →</a>
       </nav>
     </div>
   </main>
