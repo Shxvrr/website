@@ -34,5 +34,3 @@ The movie is based on an autobiographical 1967 book by the same name by writer A
 The reality of war is harsher than the characters illustrate, and people in reality would probably do much worse for even less. 
 
 4/5
-
-![[Pasted image 20261114125824.png|259]]
